@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import styles from './addProduct.module.css'
 import swal from 'sweetalert';
 import Navbar from '../../../components/module/navbar/Navbar'
+import Button from '../../../components/base/button/button';
+import Input from '../../../components/base/input/input';
 
 const AddProduct = () => {
 
@@ -151,7 +153,7 @@ const AddProduct = () => {
                         <hr className={`${styles['hr-invent']}`} />
                         <div className={`${styles['invent-form']}`}>
                             <label htmlFor="invent">Name of Goods</label>
-                            <input type="text" id="invent" name='name' onChange={handleInput} />
+                            <Input type="text" id="invent" name='name' onChange={handleInput} />
                         </div>
                     </div>
                     <div className={`${styles['item-details']}`}>
@@ -159,15 +161,15 @@ const AddProduct = () => {
                         <hr className={`${styles['hr-invent']}`} />
                         <div className={`${styles['unit-price']}`}>
                             <label htmlFor="price">Unit Price</label>
-                            <input type="number" id="price" name='price' onChange={handleInput} />
+                            <Input type="number" id="price" name='price' onChange={handleInput} />
                         </div>
                         <div className={`${styles['unit-category']}`}>
                             <label htmlFor="category">Category</label>
-                            <input type="number" id="category" name='idCategory' onChange={handleInput} />
+                            <Input type="number" id="category" name='idCategory' onChange={handleInput} />
                         </div>
                         <div className={`${styles['unit-qty']}`}>
                             <label htmlFor="stock">Stock</label>
-                            <input type="number" id="stock" name='qty' onChange={handleInput} />
+                            <Input type="number" id="stock" name='qty' onChange={handleInput} />
                         </div>
                         <div className={`${styles['unit-qty-radio']}`}>
                             <label>Stock</label>
@@ -224,8 +226,14 @@ const AddProduct = () => {
                         </div>
                     </div>
                     <div className={`${styles['btn-container']}`}>
-                        <button className={`${styles['sell-btn']}`} onClick={handleSubmit} >Jual</button>
+                        {/* <button className={`${styles['sell-btn']}`} onClick={handleSubmit} >Jual</button> */}
+                        <Button 
+                        className={`${styles['sell-btn']}`}
+                        text='Sell'
+                        onClick={handleSubmit}
+                    />
                     </div>
+                    
                 </div>
             </div>
         </div>

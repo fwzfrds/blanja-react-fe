@@ -6,52 +6,53 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './registerAdmin.module.css'
 import swal from 'sweetalert';
+import Button from '../../components/base/button/button';
 
 const RegisterAdmin = () => {
 
-    const [data, setData] = useState({
-        name: '',
-        email: '',
-        password: '',
-        phone: ''
-      })
+  const [data, setData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    phone: ''
+  })
 
-    const handleInput = (e) => {
-        e.persist();
+  const handleInput = (e) => {
+    e.persist();
 
-        setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...data, [e.target.name]: e.target.value });
+  }
+
+  const navigate = useNavigate()
+
+  // console.log(data);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+
+      const result = await axios.post(`http://localhost:5000/v1/admin/registration`, data)
+      console.log(result.data.message);
+      swal({
+        title: "Good job!",
+        text: `${result.data.message}`,
+        icon: "success"
+      });
+      navigate('/login')
+
+    } catch (error) {
+
+      console.log(error.response.data.message);
+      swal({
+        title: "Good job!",
+        text: `${error.response.data.message}`,
+        icon: "error",
+      });
+
     }
 
-    const navigate = useNavigate()
-
-    // console.log(data);
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-        try {
-
-            const result = await axios.post(`http://localhost:5000/v1/admin/registration`, data)
-            console.log(result.data.message);
-            swal({
-                title: "Good job!",
-                text: `${result.data.message}`,
-                icon: "success"
-              });
-            navigate('/login')
-
-        } catch (error) {
-
-            console.log(error.response.data.message);
-            swal({
-                title: "Good job!",
-                text: `${error.response.data.message}`,
-                icon: "error",
-              });
-            
-        }
-         
-    }
+  }
 
   return (
     <div className={`${styles.register} container-fluid d-flex align-items-center justify-content-center px-0`}>
@@ -68,13 +69,20 @@ const RegisterAdmin = () => {
         </div>
 
         <form id="my-form" onSubmit={handleSubmit} class={`input-container row mt-4 justify-content-center ${styles['input-container']}`}>
-          <input className="mt-3" type="name" name='name' placeholder="name" autoFocus onChange={handleInput}/>
+          <input className="mt-3" type="name" name='name' placeholder="name" autoFocus onChange={handleInput} />
           <input className="mt-3" type="email" name='email' placeholder="email" onChange={handleInput} />
           <input className="mt-3" type="text" name='phone' placeholder="phone number" onChange={handleInput} />
           <input className="mt-3" type="password" name='password' placeholder="password" onChange={handleInput} />
         </form>
 
-        <button form="my-form" type="submit" className={`${styles.button1} btn rounded-pill text-white mt-4`}>PRIMARY</button>
+        {/* <button form="my-form" type="submit" className={`${styles.button1} btn rounded-pill text-white mt-4`}>PRIMARY</button> */}
+
+        <Button
+          text='Sign Up'
+          form='my-form'
+          type='submit'
+          className={`${styles.button1} btn rounded-pill text-white mt-4`}
+        />
 
         <p className={`${styles.text2} mt-4`}>Already have a Blanja account? <Link to="/login" class="text-decoration-none">Login</Link></p>
 

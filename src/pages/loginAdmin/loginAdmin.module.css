@@ -33,15 +33,15 @@
     cursor: pointer;
 }
 
-.customer {
-    border-radius: 4px 0px 0px 4px;
+.seller {
+    border-radius: 0px 4px 4px 0px;
     color: white;
 }
 
-.seller {
+.customer {
     background: none;
     border: 1.5px solid rgba(155, 155, 155, 1);
-    border-radius: 0px 4px 4px 0px;
+    border-radius: 4px 0px 0px 4px;
     color: rgba(155, 155, 155, 1);
 }
 

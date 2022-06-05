@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './loginAdmin.module.css'
 import swal from 'sweetalert';
+import Button from '../../components/base/button/button';
 
 const LoginAdmin = () => {
 
@@ -22,20 +23,29 @@ const LoginAdmin = () => {
 
     const navigate = useNavigate()
 
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
 
-            const result = await axios.post(`http://localhost:5000/v1/admin/login`, data)
+            const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/admin/login`, data)
             console.log(result.data.data);
-            const token = result.data.data.token
-            localStorage.setItem('BlanjaToken', token)
+            const dataLocal =  {
+                name: result.data.data.name,
+                id: result.data.data.id,
+                email: result.data.data.email,
+                role: result.data.data.role,
+                token: result.data.data.token,
+            } 
+            console.log(dataLocal)
+            localStorage.setItem('BlanjaAdmin', JSON.stringify(dataLocal))
             swal({
                 title: "Good job!",
                 text: `${result.data.message}`,
                 icon: "success"
               });
+              
             navigate('/product-list')
 
         } catch (error) {
@@ -71,7 +81,14 @@ const LoginAdmin = () => {
                     <Link className={`${styles['forgot-password']} p-0 mt-4 text-decoration-none text-right`} to="#">Forgot password ?</Link>
                 </form>
 
-                <button form='my-form' type="submit" className={`${styles.button1} btn rounded-pill text-white mt-4`}>PRIMARY</button>
+                {/* <button form='my-form' type="submit" className={`${styles.button1} btn rounded-pill text-white mt-4`}>PRIMARY</button> */}
+
+                <Button
+                    text='Login' 
+                    form='my-form'
+                    type='submit'
+                    className={`${styles.button1} btn rounded-pill text-white mt-4`}
+                />
 
                 <p className={`${styles.text2} mt-4`}>Don't have a Blanja account? <Link to='/register' className="text-decoration-none">Register</Link></p>
 

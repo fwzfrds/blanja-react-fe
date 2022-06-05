@@ -10,11 +10,12 @@ const EditProduct = (props) => {
     const navigate = useNavigate()
     const { id } = useParams()
 
-    const [authToken, setAuthToken] = useState([]);
+    const [localData, setLocalData] = useState([])
 
     useEffect(() => {
-        const token = localStorage.getItem('BlanjaToken')
-        setAuthToken(token)
+        const dataFromLocal = JSON.parse(localStorage.getItem('BlanjaAdmin'))
+        console.log(dataFromLocal)
+        setLocalData(dataFromLocal)
     }, []);
 
     // const [dataProduct, setDataProduct] = useState([])
@@ -87,15 +88,15 @@ const EditProduct = (props) => {
 
         try {
             const result = await axios.put(`http://localhost:5000/v1/products/edit/${id}`, formData, {
-                headers: { Authorization: `Bearer ${authToken}` }
+                headers: { Authorization: `Bearer ${localData.token}` }
             })
             console.log(result);
             swal({
                 title: "Good job!",
-                text: `Data Berhasil Di Perbaharui`,
+                text: `${result.data.message}`,
                 icon: "success"
             });
-            // navigate('/')
+            navigate('/product-list')
         } catch (error) {
             console.log(error.response.data.message);
             swal({
@@ -158,9 +159,10 @@ const EditProduct = (props) => {
                             </div>
                             <div className={`${styles[`sub-menu`]}`}>
                                 <p className={`${styles['submenu-title']}`}>My Products</p>
-                                <div className={`${styles['submenu-item']}`}>
+                                <p className={`${styles['submenu-title']}`}>Selling Product</p>
+                                {/* <div className={`${styles['submenu-item']}`}>
                                     <p>Selling Product</p>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <div className={`${styles['menu-item']}`}>

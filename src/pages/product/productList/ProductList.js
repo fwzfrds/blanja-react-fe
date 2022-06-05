@@ -4,6 +4,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import axios from 'axios';
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import swal from 'sweetalert';
+import Button from '../../../components/base/button/button';
+import LinkButton from '../../../components/base/linkButton/LinkButton';
 
 const ProductList = () => {
 
@@ -64,6 +66,10 @@ const ProductList = () => {
         }
     }
 
+    const clickButton = () => {
+        alert('Ini alert dari component button yang dikirim melalui props')
+    }
+
     console.log(data);
 
     let viewProducts_HTMLTABLE = "";
@@ -100,6 +106,35 @@ const ProductList = () => {
     return (
         <div className='container mt-5'>
             <h3>Product List</h3>
+            <LinkButton 
+                text='Add Product' 
+                style={
+                    {
+                        width: 'max-content', 
+                        height: 40, 
+                        background: 'red',
+                        borderRadius: 8,
+                        border: 'none',
+                        color: 'white',
+                        padding: 15,
+                        margin: 15,
+                        textDecoration: 'none'
+                    }
+                }
+                navigateTo={'/add-product'}
+            />
+            <Button
+                text='+ Product' 
+                style={
+                    {
+                        width: '100px', height: 40, background: 'red',
+                        borderRadius: 8,
+                        border: 'none',
+                        color: 'white' 
+                    }
+                } 
+                onClick={clickButton} 
+            />
             <table className="table">
                 <thead>
                     <tr>

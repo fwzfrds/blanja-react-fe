@@ -31,15 +31,15 @@
     cursor: pointer;
 }
 
-.seller {
-    border-radius: 0px 4px 4px 0px;
+.customer {
+    border-radius: 4px 0px 0px 4px;
     color: white;
 }
 
-.customer {
+.seller {
     background: none;
     border: 1.5px solid rgba(155, 155, 155, 1);
-    border-radius: 4px 0px 0px 4px;
+    border-radius: 0px 4px 4px 0px;
     color: rgba(155, 155, 155, 1);
 }
 
