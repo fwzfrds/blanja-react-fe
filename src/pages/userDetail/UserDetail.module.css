@@ -1,0 +1,432 @@
+@import url("../../assets/css/fonts.css");
+
+/* Body */
+.profile-container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    background: #F5F5F5;
+}
+
+.profile-nav {
+    width: 27.43%;
+    min-height: 100vh;
+    background-color: #FFFFFF;
+    position: fixed;
+}
+
+.profile {
+    display: flex;
+    width: max-content;
+    gap: 13.75px;
+    margin-top: 150px;
+    margin-left: 120px;
+}
+
+.profile-img {
+    width: 60px;
+    height: 60px;
+}
+
+.profile-text {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 4px;
+}
+
+.profile-text h3,
+.profile-text p {
+    margin: 0px;
+}
+
+.profile-text h3 {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+.profile-text p {
+    font-family: metropolis-regular;
+    font-size: 14px;
+    line-height: 24px;
+    color: #9B9B9B;
+}
+
+.profile-action {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.profile-menu {
+    /* border: 1px solid black; */
+    width: 200px;
+    height: 300px;
+    margin-left: 120px;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+}
+
+.menu-item:hover {
+    transform: scale(1.1);
+}
+
+.menu-icon {
+    width: 32px;
+    height: 32px;
+    background: blue;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-icon.ship-address {
+    background: #F36F45;
+}
+
+.menu-icon.my-order {
+    background: #F3456F;
+}
+
+.menu-text {
+    font-size: 14px;
+    color: #9B9B9B;
+    font-family: metropolis-regular;
+}
+
+.active {
+    color: black;
+    font-family: metropolis-semi-bold;
+}
+
+
+/* Profile Data */
+.profile-data {
+    width: 72.57%;
+    min-height: 100vh;
+    margin-left: 370.02px;
+    /* background: #F5F5F5; */
+}
+
+.data-container {
+    width: 850px;
+    height: max-content;
+    background: #FFFFFF;
+    border: 1px solid #9B9B9B;
+    border-radius: 4px;
+    margin-top: 150px;
+    margin-left: 45px;
+    margin-bottom: 50px;
+}
+
+.data-title {
+    margin-left: 30px;
+    margin-top: 30px;
+}
+
+.data-title h3,
+.data-title p {
+    margin: 0;
+    font-size: 20px;
+}
+
+.data-title p {
+    margin-top: 10px;
+    font-family: metropolis-regular;
+    font-size: 14px;
+    color: #9B9B9B;
+}
+
+.data-hr {
+    width: 800px;
+    margin-top: 16px;
+    /* height: 2px; */
+    background: rgba(212, 212, 212, 1);
+}
+
+.data-form-container {
+    margin: 0px 30px;
+    /* border: 1px solid black; */
+    /* box-shadow: 0px 0px 8px rgba(115, 115, 115, 0.25); */
+    /* height: 500px; */
+    margin-top: 24px;
+    display: flex;
+}
+
+.data-field {
+    margin-bottom: 22px;
+}
+
+.data-field .field-name {
+    display: inline-block;
+    color: rgba(155, 155, 155, 1);
+    font-size: 14px;
+    line-height: 24px;
+    text-align: right;
+    width: 105px;
+    font-size: 14px;
+    /* background: #F3456F; */
+}
+
+.data-form input {
+    width: 348px;
+    height: 48px;
+    border: 2px solid #9B9B9B;
+    border-radius: 4px;
+    padding-left: 18px;
+    margin-left: 40px;
+}
+
+.data-gender {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.data-gender label.field-name-gender {
+    width: 105px;
+    text-align: end;
+    color: rgba(155, 155, 155, 1);
+}
+
+.data-gender .radio-button {
+    margin-left: 42px;
+}
+
+.data-gender .radio-button .radio-item input {
+    width: 18px;
+    height: 18px;
+    margin: 0px;
+    cursor: pointer;
+}
+
+.radio-button {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.radio-item label {
+    cursor: pointer;
+    color: rgba(155, 155, 155, 1);
+    font-size: 14px;
+}
+
+.birth-date {
+    margin-top: 30px;
+}
+
+.birth-date label.birth-field-name {
+    display: inline-block;
+    width: 105px;
+    height: 30px;
+    text-align: end;
+    color: rgba(155, 155, 155, 1);
+}
+
+.birth-date input {
+    margin-left: 40px;
+}
+
+.data-btn {
+    width: 100px;
+    height: 36px;
+    background: #DB3022;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    font-size: 14px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    border: none;
+    margin-left: 150px;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+.data-btn:hover {
+    background: orange;
+}
+
+.data-img {
+    height: max-content;
+    width: 200px;
+    border-left: 1px solid #8E8E93;
+    margin-left: 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 27px;
+    align-items: center;
+}
+
+/* .data-img img {
+    margin-left: 79px;
+} */
+
+.img-button {
+    width: 140px;
+    height: 36px;
+    border: 1px solid #9B9B9B;
+    border-radius: 24px;
+    background: none;
+    cursor: pointer;
+    color: rgba(155, 155, 155, 1);
+    /* margin-top: 27px;
+    margin-left: 60px; */
+    transition: 0.1s ease-in-out;
+}
+
+.img-button:hover {
+    background: rgba(155, 155, 155, 1);
+    color: #FFFFFF;
+}
+
+@media only screen and (max-width: 600px) {
+
+    /* Profile Nav */
+    .profile-nav {
+        width: 100vw;
+        min-height: 0px;
+        background-color: #FFFFFF;
+        /* border: 1px solid black; */
+        position: fixed;
+    }
+
+    .profile {
+        display: flex;
+        width: max-content;
+        gap: 13.75px;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }    
+
+    .profile-menu {
+        /* border: 1px solid black; */
+        margin: 20px;
+        width: 90vw;
+        height: max-content;
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+    }
+
+    .menu-item {
+        display: flex;
+        gap: 0px;
+    }
+
+    .menu-text {
+        margin-left: 10px;
+    }
+
+    /* Profile Data */
+    .profile-data {
+        width: 90vw;
+        min-height: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-top: 176px;
+        margin-bottom: 30px;
+    }
+
+    .data-container {
+        width: 100%;
+        margin-top: 15px;
+        margin-left: 0px;
+    }
+
+    .data-title {
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .data-hr {
+        width: 100%;
+    }
+    
+    .data-form-container {
+        margin: 0px 20px;
+        margin-top: 10px;
+        flex-direction: column-reverse;
+    }
+
+    .data-field {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+
+    .data-field .field-name {
+        text-align: left;
+    }
+
+    .data-form input {
+        width: 92%;
+        height: 48px;
+        border: 2px solid #9B9B9B;
+        border-radius: 4px;
+        padding-left: 18px;
+        margin-left: 0px;
+    }
+
+    .data-gender {
+        display: block;
+        margin-top: 20px;
+    }
+
+    .radio-button {
+        display: flex;
+        align-items: center;
+        gap: 36px;
+        margin-top: 10px;
+        margin-left: 0px !important;
+    }
+
+    .birth-date {
+        margin-top: 20px;
+    }
+
+    .birth-date label.birth-field-name {
+        text-align: start;
+    }
+
+    .data-btn {
+        width: 100%;
+        margin: 30px auto;
+        border-radius: 5px;
+    }
+
+    .data-img {
+        width: 100%;
+        order: 1;
+        margin: 20px;
+        border-left: none;
+        margin-left: 0px;
+        justify-content: center;
+    }
+
+}

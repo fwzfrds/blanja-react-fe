@@ -28,13 +28,13 @@ body {
     color: orange;
 }
 
-input.search {
+.search {
     height: 40px;
     width: 500px;
     border-color: rgba(142, 142, 147, 1) !important;
 }
 
-input.search::placeholder {
+.search::placeholder {
     font-family: metropolis-regular;
     color: rgba(142, 142, 147, 1) !important;
 }
@@ -56,37 +56,84 @@ button.navbar-toggler {
     display: none;
 }
 
-a.dropdown-item {
+.dropdown-item {
     font-family: metropolis-regular;
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
 }
 
-a.nav-link:hover {
+.dropdown-item:hover, .dropdown-item.logout:hover {
+    color: #DB3022;
+}
+
+.dropdown-item.logout {
+    color: #9B9B9B;
+}
+
+.nav-link:hover {
     background: rgba(255, 166, 0, 0.377);
     /* background: rgba(219, 48, 34, 0.1); */
 }
 
-a.btn .dropdown-toggle {
+.btn .dropdown-toggle {
     border: none;
 }
 
-a.account-dropdown:hover {
+.account-dropdown:hover {
     background: rgba(255, 166, 0, 0.377);
 }
 
-a.account-dropdown::after {
+.account-dropdown::after {
     display: none !important;
 }
 
-ul.user-dropdown.dropdown-menu {
+.user-dropdown.dropdown-menu {
     position: absolute !important;
     font-family: metropolis-regular !important;
     top: 50px;
     left: -200%;
 }
 
-div.navbar-collapse {
+.navbar-collapse {
     display: flex;
     justify-content: end;
+}
+
+.user-menu-btn {
+    margin-left: 20px;
+    display: flex;
+}
+
+.user-menu-btn .signin, .user-menu-btn .signup  {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 36px;
+    background: #DB3022;
+    border-radius: 25px;
+    border: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: 0.125s ease-in-out;
+    text-decoration: none;
+}
+
+.user-menu-btn .signin:hover {
+    background: orange;
+}
+
+.user-menu-btn .signup {
+    background: none;
+    color: rgba(155, 155, 155, 1);
+    border: 1px solid #9B9B9B;
+    margin-left: 10px;
+}
+
+.user-menu-btn .signup:hover {
+    background: #9B9B9B;
+    color: #FFFFFF;
 }
 
 @media only screen and (max-width: 600px) {

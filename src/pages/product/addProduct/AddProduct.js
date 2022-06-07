@@ -6,19 +6,22 @@ import swal from 'sweetalert';
 import Navbar from '../../../components/module/navbar/Navbar'
 import Button from '../../../components/base/button/button';
 import Input from '../../../components/base/input/input';
+import {addProduct} from '../../../config/redux/actions/productAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 const AddProduct = () => {
 
     const navigate = useNavigate()
-
     const [authToken, setAuthToken] = useState([]);
+    const dispatch = useDispatch()
+
 
     useEffect(() => {
-        const token = localStorage.getItem('BlanjaToken')
-        setAuthToken(token)
+        // const token = localStorage.getItem('BlanjaAdmin')
+        const dataFromLocal = JSON.parse(localStorage.getItem('BlanjaAdmin'))
+        console.log(dataFromLocal.token);
+        setAuthToken(dataFromLocal.token)
     }, []);
-
-    console.log(`the type of token is`, typeof authToken);
 
     const [data, setData] = useState({
         name: '',
@@ -60,20 +63,21 @@ const AddProduct = () => {
             formData.append('idCategory', data.idCategory)
 
             try {
-                const result = await axios.post('http://localhost:5000/v1/products/add', formData, {
-                    headers: { Authorization: `Bearer ${authToken}` }
-                })
-                console.log(result);
-                swal({
-                    title: "Good job!",
-                    text: `Data Tersimpan`,
-                    icon: "success"
-                });
-                navigate('/')
+                dispatch(addProduct(formData, authToken))
+                // const result = await axios.post('http://localhost:5000/v1/products/add', formData, {
+                //     headers: { Authorization: `Bearer ${authToken}` }
+                // })
+                // console.log(result);
+                // swal({
+                //     title: "Good job!",
+                //     text: `Data Tersimpan`,
+                //     icon: "success"
+                // });
+                // navigate('/')
             } catch (error) {
                 console.log(error.response.data.message);
                 swal({
-                    title: "Good job!",
+                    title: "Add Product Error!",
                     text: `${error.response.data.message}`,
                     icon: "error",
                 });

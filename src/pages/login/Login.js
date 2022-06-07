@@ -3,20 +3,22 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
-import swal from 'sweetalert';
+// import axios from 'axios';
+// import swal from 'sweetalert';
 import styles from './login.module.css'
 import Button from '../../components/base/button/button';
+import {loginUser} from '../../config/redux/actions/userAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 const Login = () => {
 
+    const dispatch = useDispatch()
+    const {isLoading, user} = useSelector((state)=>state.user)
+    const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
         email: '',
         password: ''
     })
-
-    const navigate = useNavigate()
-
 
     const handleInput = (e) => {
         e.persist();
@@ -27,41 +29,44 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        try {
+        dispatch(loginUser(loginData, navigate))
+        // try {
 
-            const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/users/login`, loginData)
-            console.log(result.data.data);
-            const dataLocal =  {
-                firstName: result.data.data.first_name,
-                lastName: result.data.data.last_name,
-                id: result.data.data.id,
-                email: result.data.data.email,
-                role: result.data.data.role,
-                token: result.data.data.token,
-                refreshToken: result.data.data.RefreshToken,
-            } 
-            console.log(dataLocal)
-            localStorage.setItem('BlanjaUser', JSON.stringify(dataLocal))
-            swal({
-                title: "Good job!",
-                text: `${result.data.message}`,
-                icon: "success"
-              });
+        //     const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/users/login`, loginData)
+        //     console.log(result.data.data);
+        //     const dataLocal =  {
+        //         firstName: result.data.data.first_name,
+        //         lastName: result.data.data.last_name,
+        //         id: result.data.data.id,
+        //         email: result.data.data.email,
+        //         role: result.data.data.role,
+        //         token: result.data.data.token,
+        //         refreshToken: result.data.data.RefreshToken,
+        //     } 
+        //     console.log(dataLocal)
+        //     localStorage.setItem('BlanjaUser', JSON.stringify(dataLocal))
+        //     swal({
+        //         title: "Good job!",
+        //         text: `${result.data.message}`,
+        //         icon: "success"
+        //       });
               
-            navigate('/product-list')
+        //     navigate('/product-list')
 
-        } catch (error) {
+        // } catch (error) {
 
-            console.log(error.response.data.message);
-            swal({
-                title: "Good job!",
-                text: `${error.response.data.message}`,
-                icon: "error",
-              });
+        //     console.log(error.response.data.message);
+        //     swal({
+        //         title: "Good job!",
+        //         text: `${error.response.data.message}`,
+        //         icon: "error",
+        //       });
             
-        }
+        // }
 
     }
+
+    console.log(user)
 
     return (
         <div className={`${styles.login} d-flex align-items-center justify-content-center`}>
@@ -85,7 +90,7 @@ const Login = () => {
 
                 {/* <button type="button" className={`${styles.button1} btn rounded-pill text-white mt-4`}>PRIMARY</button> */}
                 <Button
-                    text='Login' 
+                    text={isLoading ? 'loading..': 'Login'} 
                     form='my-form'
                     type='submit'
                     className={`${styles.button1} btn rounded-pill text-white mt-4`}

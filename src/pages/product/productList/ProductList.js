@@ -6,6 +6,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import swal from 'sweetalert';
 import Button from '../../../components/base/button/button';
 import LinkButton from '../../../components/base/linkButton/LinkButton';
+import {useDispatch, useSelector} from 'react-redux'
+import {deleteProduct} from '../../../config/redux/actions/productAction'
 
 const ProductList = () => {
 
@@ -13,10 +15,11 @@ const ProductList = () => {
     const [loading, setLoading] = useState(true);
     const [authToken, setAuthToken] = useState([]);
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        const token = localStorage.getItem('BlanjaToken')
-        setAuthToken(token)
+        const localData = JSON.parse(localStorage.getItem('BlanjaAdmin'))
+        setAuthToken(localData.token)
     }, []);
 
     const fethData = async () => {
@@ -43,15 +46,16 @@ const ProductList = () => {
         thisClicked.innerText = "Deleting...";
 
         try {
-            const result = await axios.delete(`http://localhost:5000/v1/products/${id}`, {
-                headers: { Authorization: `Bearer ${authToken}` }
-            })
-            swal({
-                title: "Success",
-                text: 'Delete Product Success',
-                icon: "success",
-                button: "OK!",
-            });
+            dispatch(deleteProduct(authToken,id))
+            // const result = await axios.delete(`http://localhost:5000/v1/products/${id}`, {
+            //     headers: { Authorization: `Bearer ${authToken}` }
+            // })
+            // swal({
+            //     title: "Success",
+            //     text: 'Delete Product Success',
+            //     icon: "success",
+            //     button: "OK!",
+            // });
             thisClicked.closest("tr").remove();
         } catch (error) {
             console.log(error.response.data.message);

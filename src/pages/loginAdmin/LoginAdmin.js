@@ -29,23 +29,32 @@ const LoginAdmin = () => {
 
         try {
 
+            const localData = localStorage.getItem('BlanjaUser')
+            if (localData) {
+                return swal({
+                    title: "Error",
+                    text: `Anda sudah masuk sebagai User`,
+                    icon: "error",
+                });
+            }
+
             const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/admin/login`, data)
             console.log(result.data.data);
-            const dataLocal =  {
+            const dataLocal = {
                 name: result.data.data.name,
                 id: result.data.data.id,
                 email: result.data.data.email,
                 role: result.data.data.role,
                 token: result.data.data.token,
-            } 
+            }
             console.log(dataLocal)
             localStorage.setItem('BlanjaAdmin', JSON.stringify(dataLocal))
             swal({
                 title: "Good job!",
                 text: `${result.data.message}`,
                 icon: "success"
-              });
-              
+            });
+
             navigate('/product-list')
 
         } catch (error) {
@@ -55,10 +64,10 @@ const LoginAdmin = () => {
                 title: "Good job!",
                 text: `${error.response.data.message}`,
                 icon: "error",
-              });
-            
+            });
+
         }
-         
+
     }
 
     return (
@@ -76,7 +85,7 @@ const LoginAdmin = () => {
                 </div>
 
                 <form id='my-form' onSubmit={handleSubmit} className={`input-container row mt-4 justify-content-center ${styles['input-container']}`}>
-                    <input className="mt-3" type="email" name='email'   placeholder="email" autoFocus onChange={handleInput} />
+                    <input className="mt-3" type="email" name='email' placeholder="email" autoFocus onChange={handleInput} />
                     <input className="mt-3" name='password' type="password" placeholder="password" onChange={handleInput} />
                     <Link className={`${styles['forgot-password']} p-0 mt-4 text-decoration-none text-right`} to="#">Forgot password ?</Link>
                 </form>
@@ -84,7 +93,7 @@ const LoginAdmin = () => {
                 {/* <button form='my-form' type="submit" className={`${styles.button1} btn rounded-pill text-white mt-4`}>PRIMARY</button> */}
 
                 <Button
-                    text='Login' 
+                    text='Login'
                     form='my-form'
                     type='submit'
                     className={`${styles.button1} btn rounded-pill text-white mt-4`}

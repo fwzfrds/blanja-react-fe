@@ -1,0 +1,365 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css");
+
+@import url("../../assets/css/fonts.css");
+
+.cart-container {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: metropolis-semi-bold;
+    position: relative;
+    /* background: #9B9B9B; */
+}
+
+.my-bag {
+    margin-top: 150px;
+    margin-left: 120px;
+    font-size: 34px;
+}
+
+.cart-section {
+    margin: 0px 120px;
+    margin-top: 100px;
+    /* border: 1px solid black; */
+    display: flex;
+    /* min-height: 100vh; */
+}
+
+.items {
+    width: 700px;
+}
+
+.selection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 0px 8px rgba(115, 115, 115, 0.25);
+    border-radius: 4px;
+    height: 64px;
+}
+
+
+.selection .check,
+.item .check {
+    /* margin-left: 20px; */
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    background-color: #d5d5d5;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.checkbox::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f00c";
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+    display: none;
+}
+
+.checkbox:hover {
+    background-color: #a5a5a5;
+}
+
+.checkbox:checked {
+    background-color: rgba(219, 48, 34, 1);
+}
+
+.checkbox:checked::after {
+    display: block;
+}
+
+.selection .select {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: #222222;
+    justify-items: left;
+    width: 85%;
+    margin-left: 10px;
+}
+
+.selection .selected {
+    color: #9B9B9B;
+}
+
+.selection .del {
+    margin-right: 20px;
+    color: rgba(219, 48, 34, 1);
+    cursor: pointer;
+    width: 10%;
+    opacity: 0.5;
+    font-weight: 600;
+    transition: 0.1s ease-in-out;
+}
+
+.selection .del:hover {
+    opacity: 1;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 0px 8px rgba(115, 115, 115, 0.25);
+    border-radius: 4px;
+    margin-top: 20px;
+    height: 126px;
+}
+
+.image {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 55%;
+}
+
+.image img {
+    width: 70px;
+    height: 69px;
+    margin-left: 10px;
+}
+
+.image-text h3,
+.image-text p {
+    margin: 0px;
+}
+
+.image-text h3 {
+    font-size: 16px;
+    font-weight: 500px;
+}
+
+.image-text p {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(155, 155, 155, 1);
+}
+
+.qty {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 20%;
+    font-size: 20px;
+}
+
+.qty p:first-child {
+    background: #D5D5D5;
+    height: 36px;
+    width: 36px;
+    text-align: center;
+    line-height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.qty p:last-child {
+    height: 36px;
+    width: 36px;
+    text-align: center;
+    line-height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px rgba(142, 142, 142, 0.25);
+}
+
+.price {
+    width: 20%;
+    text-align: right;
+    margin-right: 30px;
+}
+
+.price h3 {
+    font-size: 22px;
+}
+
+.summary {
+    width: 370px;
+    height: 180px;
+    box-shadow: 0px 0px 8px rgba(115, 115, 115, 0.25);
+    border-radius: 4px;
+    margin-left: 40px;
+}
+
+.shop-summary {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    margin-left: 24px;
+    margin-top: 24px;
+}
+
+.total-summary {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 24px;
+    margin-right: 24px;
+}
+
+.total-summary h4 {
+    margin: 21.28px 0px;
+}
+
+.total-summary .total {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 16px;
+    color: #9B9B9B;
+}
+
+.total-summary .total-price {
+    font-size: 18px;
+}
+
+.buy-button {
+    width: 322px;
+    height: 36px;
+    border-radius: 25px;
+    background: rgba(219, 48, 34, 1);
+    border: none;
+    color: white;
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    transition: 0.1s ease-in-out;
+}
+
+.buy-button:hover {
+    background-color: orange;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .my-bag {
+        margin: 0px;
+        margin-top: 30px;
+        text-align: center;
+        font-size: 24px;
+    }
+
+    .cart-section {
+        flex-direction: column;
+        gap: 20px;
+        margin: 0px 30px;
+        margin-top: 70px;
+    }
+
+    .items {
+        width: 100%;
+    }
+
+    .selection .check,
+    .item .check {
+        /* margin-left: 20px; */
+        width: 15%;
+    }
+
+    .selection .select {
+        font-weight: 600;
+        font-size: 14px;
+        width: 80%;
+    }
+
+    .selection .del {
+        font-size: 14px;
+    }
+
+    .item {
+        position: relative;
+    }
+
+    .image {
+        width: 85%;
+        align-items: flex-start;
+    }
+
+    .image-text h3 {
+        font-size: 14px;
+        margin-right: 10px;
+    }
+
+    .image-text p {
+        margin-top: 5px;
+    }
+
+    .qty {
+        position: absolute;
+        /* display: none; */
+        width: fit-content;
+        gap: 10px;
+        font-size: 16px;
+        left: 155px;
+        top: 60px;
+    }
+
+    .qty p:first-child, .qty p:last-child {
+        height: 24px;
+        width: 24px;
+        line-height: 24px;
+    }
+
+
+    .price {
+        position: absolute;
+        /* display: none; */
+        font-size: 14px;
+        left: 245px;
+        top: 65px;
+        /* background: blue; */
+    }
+
+    .price h3 {
+        font-size: 14px !important;
+    }
+
+    .summary {
+        width: 100%;
+        height: max-content;
+        margin-left: 0px;
+        margin-bottom: 100px;
+    }
+
+    .shop-summary {
+        margin-top: 15px;
+        margin-left: 15px;
+        font-size: 14px;
+        margin-bottom: 0px;
+    }
+
+    .total-summary {
+        margin: 0px 15px;
+        margin-top: 10px;
+    }
+
+    .total-summary .total {
+        font-size: 14px;
+        margin: 0px;
+    }
+
+    .total-summary .total-price {
+        margin: 0px;
+        font-size: 18px;
+    }
+    
+    .buy-button {
+        width: 92%;
+        margin: 0px 15px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+}

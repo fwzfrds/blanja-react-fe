@@ -4,23 +4,25 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import styles from './editProduct.module.css'
 import swal from 'sweetalert';
 import Navbar from '../../../components/module/navbar/Navbar'
+import {updateProduct} from '../../../config/redux/actions/productAction'
+import {useDispatch, useSelector} from 'react-redux'
 
 const EditProduct = (props) => {
 
     const navigate = useNavigate()
     const { id } = useParams()
+    const dispatch = useDispatch()
+
+    const {isLoading, products} = useSelector((state)=>state.products)
+
 
     const [localData, setLocalData] = useState([])
 
     useEffect(() => {
         const dataFromLocal = JSON.parse(localStorage.getItem('BlanjaAdmin'))
-        console.log(dataFromLocal)
-        setLocalData(dataFromLocal)
+        console.log(dataFromLocal.token)
+        setLocalData(dataFromLocal.token)
     }, []);
-
-    // const [dataProduct, setDataProduct] = useState([])
-
-    // console.log(dataProduct);
 
     const [data, setData] = useState({
         name: '',
@@ -31,12 +33,12 @@ const EditProduct = (props) => {
     })
 
     const [image, setImage] = useState('http://fakeimg.pl/190x190')
-    // const [image, setImage] = useState(`${dataProduct.image}`)
 
     const [saveImg, setSaveImg] = useState(null)
 
     useEffect(() => {
         const fethData = async () => {
+            // dispatch(updateProduct(id))
 
             try {
                 const product_id = id;
@@ -87,20 +89,21 @@ const EditProduct = (props) => {
         console.log(formData.get('photo'))
 
         try {
-            const result = await axios.put(`http://localhost:5000/v1/products/edit/${id}`, formData, {
-                headers: { Authorization: `Bearer ${localData.token}` }
-            })
-            console.log(result);
-            swal({
-                title: "Good job!",
-                text: `${result.data.message}`,
-                icon: "success"
-            });
-            navigate('/product-list')
+            dispatch(updateProduct(formData, localData, id))
+            // const result = await axios.put(`http://localhost:5000/v1/products/edit/${id}`, formData, {
+            //     headers: { Authorization: `Bearer ${localData.token}` }
+            // })
+            // console.log(result);
+            // swal({
+            //     title: "Good job!",
+            //     text: `${result.data.message}`,
+            //     icon: "success"
+            // });
+            // navigate('/product-list')
         } catch (error) {
             console.log(error.response.data.message);
             swal({
-                title: "Good job!",
+                title: "Update Error!",
                 text: `${error.response.data.message}`,
                 icon: "error",
             });
@@ -125,6 +128,9 @@ const EditProduct = (props) => {
     }
 
     console.log(data);
+    console.log(products)
+
+    // Edit Berhasil Lanjut Delete
 
     return (
         <div>
