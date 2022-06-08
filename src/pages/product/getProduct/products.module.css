@@ -111,11 +111,17 @@
 .actions-container {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
 }
 
 .filter-container {
     display: flex;
+    align-items: center;
     gap: 10px;
+}
+
+.filter-container h4 {
+    margin: 0;
 }
 
 .filter-container button {

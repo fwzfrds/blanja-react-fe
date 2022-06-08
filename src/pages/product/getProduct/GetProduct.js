@@ -7,6 +7,7 @@ import { getProducts, searchProducts } from '../../../config/redux/actions/produ
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../../../components/module/navbar/Navbar';
 import Loading from '../../../components/base/loading/Loading';
+import Button from '../../../components/base/button/button';
 
 const GetProduct = () => {
 
@@ -90,12 +91,25 @@ const GetProduct = () => {
                 <div className={`${styles['actions-container']}`}>
                     <div className={`${styles['search-container']}`}>
                         <input type="text" name="search" placeholder="search" onChange={(e) => setSearch(e.target.value)} />
-                        <button onClick={handleSearch}>Cari</button>
-                        <p>hasil pencarian adalah = {searchParams.get('keyword')}</p>
+                        {/* <button onClick={handleSearch}><i class="fa-solid fa-magnifying-glass"></i></button> */}
+                        <Button
+                            text={<i class="fa-solid fa-magnifying-glass"></i>}
+                            onClick={handleSearch}
+                            style={{ 
+                                background: '#DB3022',
+                                color: '#FFF',
+                                border: '1px solid black',
+                                borderLeft: 'none',
+                                height: 30,
+                                borderRadius: '0 5px 5px 0'
+                             }}
+                        />
+                        {/* <p>hasil pencarian adalah = {searchParams.get('keyword')}</p> */}
                     </div>
                     <div className={`${styles['filter-container']}`}>
-                        <button onClick={()=>handleSort('asc')}>ASC</button>
-                        <button onClick={()=>handleSort('desc')}>DESC</button>
+                        <h4>Price : </h4>
+                        <button onClick={()=>handleSort('asc')}><i class="fa-solid fa-down-long"></i></button>
+                        <button onClick={()=>handleSort('desc')}><i class="fa-solid fa-arrow-up"></i></button>
                     </div>
                 </div>
 
@@ -138,7 +152,12 @@ const GetProduct = () => {
                         onClick={() => handlePage(2)}
                     >2
                     </button> */}
-                    {new Array(3).fill().map((item, index) => <button>{index + 1}</button>)}
+                    {new Array(2).fill().map((item, index) => 
+                    <Button
+                        onClick={() => handlePage(index + 1)}
+                        text={index + 1}
+                    >
+                    </Button>)}
                 </div>
             </div>
         </div>

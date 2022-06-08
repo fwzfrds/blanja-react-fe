@@ -21,6 +21,13 @@ const Navbar = () => {
     }
   }, [])
 
+  useEffect(() => {
+    const localData = localStorage.getItem('BlanjaAdmin')
+    if (localData) {
+      setIsLogin(true)
+    }
+  }, [])
+
   const handleBurgerClick = () => {
     if (show === false) {
       return setShow(true)

@@ -40,6 +40,8 @@ const Login = () => {
         const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
         if (!regEx.test(emailData)) {
             return setIsInputValid({...isInputValid, email: 'email is not valid'})
+        } else {
+            setIsInputValid({...isInputValid, email: ''})
         }
         
         const localData = await localStorage.getItem('BlanjaAdmin')
