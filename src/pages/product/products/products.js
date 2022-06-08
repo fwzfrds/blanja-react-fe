@@ -76,7 +76,7 @@ const ProductsData = () => {
                 <h3 className={`${styles['new-title']}`}>New</h3>
                 <p className={`${styles['new-text']}`}>You've never seen it before</p>
                 <div className={`${styles.products}`}>
-                    {products ? (products.data).map(item => (
+                    {products.data ? (products.data).map(item => (
                         <Card
                             to={`/detail-product/${item.id}`}
                             key={item.id}

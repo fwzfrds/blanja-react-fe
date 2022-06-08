@@ -104,13 +104,12 @@ const GetProduct = () => {
                     {products.data ? (products.data).map(item => (
                         <Card
                             to={`/detail-product/${item.id}`}
-                            key={item.id}
                             className={`${styles['prod-card']}`}
                         >
                             <div className={`${styles['prod-img-container']}`}>
                                 <img src="./assets/img/suit-lscape.png" alt="suit" />
                             </div>
-                            <div className={`${styles['prod-name-container']}`}>
+                            <div className={`${styles['prod-name-container']}`} key={item.id}>
                                 <h4 className={`${styles['prod-name']}`}>{item.name}</h4>
                                 <h4 className={`${styles['prod-price']}`}>Rp. {item.price}</h4>
                                 <h3 className={`${styles['store-name']}`}>Zalora CLoth</h3>
