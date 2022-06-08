@@ -9,6 +9,8 @@ import styles from './login.module.css'
 import Button from '../../components/base/button/button';
 import {loginUser} from '../../config/redux/actions/userAction'
 import {useDispatch, useSelector} from 'react-redux'
+import swal from 'sweetalert';
+import ValidMessage from '../../components/base/validation/ValidMessage';
 
 const Login = () => {
 
@@ -16,6 +18,10 @@ const Login = () => {
     const {isLoading, user} = useSelector((state)=>state.user)
     const navigate = useNavigate()
     const [loginData, setLoginData] = useState({
+        email: '',
+        password: ''
+    })
+    const [isInputValid, setIsInputValid] = useState({
         email: '',
         password: ''
     })
@@ -28,6 +34,22 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+
+        // console.log(loginData)
+        const {email: emailData} = loginData
+        const regEx = /[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}(.[a-z{2,8}])?/g;
+        if (!regEx.test(emailData)) {
+            return setIsInputValid({...isInputValid, email: 'email is not valid'})
+        }
+        
+        const localData = await localStorage.getItem('BlanjaAdmin')
+            if (localData) {
+                return swal({
+                    title: "Error",
+                    text: `Anda sudah masuk sebagai Admin`,
+                    icon: "error",
+                });
+            }
 
         dispatch(loginUser(loginData, navigate))
         // try {
@@ -66,7 +88,9 @@ const Login = () => {
 
     }
 
-    console.log(user)
+    console.log(loginData)
+    console.log(isLoading)
+    console.log(isInputValid)
 
     return (
         <div className={`${styles.login} d-flex align-items-center justify-content-center`}>
@@ -84,13 +108,19 @@ const Login = () => {
 
                 <form id='my-form' onSubmit={handleSubmit} className={`input-container row mt-4 justify-content-center ${styles['input-container']}`}>
                     <input className="mt-3" type="email" name='email'   placeholder="email" autoFocus onChange={handleInput} />
+                    <ValidMessage 
+                        text={isInputValid.email && `${isInputValid.email}`}
+                        style={{ 
+                            color: 'red'
+                         }}
+                    />
                     <input className="mt-3" name='password' type="password" placeholder="password" onChange={handleInput} />
                     <Link className={`${styles['forgot-password']} p-0 mt-4 text-decoration-none text-right`} to="#">Forgot password ?</Link>
                 </form>
 
                 {/* <button type="button" className={`${styles.button1} btn rounded-pill text-white mt-4`}>PRIMARY</button> */}
                 <Button
-                    text={isLoading ? 'loading..': 'Login'} 
+                    text={isLoading === false ? 'Login' : 'loading..'} 
                     form='my-form'
                     type='submit'
                     className={`${styles.button1} btn rounded-pill text-white mt-4`}

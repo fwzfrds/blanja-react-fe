@@ -28,15 +28,20 @@ const Navbar = () => {
     setShow(false)
   }
 
-  const handleLogout = () => {
-    localStorage.removeItem('BlanjaUser')
+  const handleLogout = async () => {
+    await localStorage.removeItem('BlanjaUser')
     setIsLogin(false)
     swal({
       title: "Log Out",
       text: `Log Out Success`,
       icon: "success"
     });
+
     navigate('/login')
+
+    // setTimeout(() => {
+    //   navigate('/login')
+    // }, 1000);
   }
 
   return (

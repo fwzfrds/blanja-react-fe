@@ -128,7 +128,7 @@ const GetProduct = () => {
                     }
                 </div>
                 <div className={`${styles['page-container']}`}>
-                    <button
+                    {/* <button
                         className={`${styles.active}`}
                         onClick={() => handlePage(1)}
                     >1
@@ -137,7 +137,8 @@ const GetProduct = () => {
                     <button
                         onClick={() => handlePage(2)}
                     >2
-                    </button>
+                    </button> */}
+                    {new Array(3).fill().map((item, index) => <button>{index + 1}</button>)}
                 </div>
             </div>
         </div>

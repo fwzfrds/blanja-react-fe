@@ -19,7 +19,11 @@ const DetailProduct = () => {
 
     useEffect(() => {
         console.log('use effect run ...')
-        const object = (products.data).find(obj => obj.id === parseInt(id))
+        console.log(id)
+        console.log(typeof id)
+        const data = products.data
+        console.log(data)
+        const object = data.find(obj => obj.id === parseInt(id))
         console.log(object)
         setProductData(object)
     }, [])
@@ -28,8 +32,8 @@ const DetailProduct = () => {
     // console.log(object)
     // setProductData(object)
 
-    console.log(products.data)
-    console.log(productData)
+    // console.log(products.data)
+    // console.log(productData)
     // console.log(isLoading)
     // console.log(products)
 

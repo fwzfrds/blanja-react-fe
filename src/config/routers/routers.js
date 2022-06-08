@@ -16,7 +16,9 @@ import RegisterAdmin from '../../pages/registerAdmin/RegisterAdmin'
 import UserProfile from '../../pages/userDetail/UserDetail'
 import AuthUser from '../../helper/isUser'
 import AuthAdmin from '../../helper/isAdmin'
+import IsUserLogin from '../../helper/isUserLogin'
 import Checkout from '../../pages/checkout/Checkout'
+import IsAdminLogin from '../../helper/isAdminLogin'
 
 const Routers = () => {  
 
@@ -24,11 +26,11 @@ const Routers = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}/>
-        <Route path="/login" element={<Login />}/>
+        <Route path="/login" element={<IsUserLogin> <Login/> </IsUserLogin>}/>
         <Route path="/get-products" element={<GetProduct />}/>
         <Route path="/product-list" element={<ProductList />}/>
         <Route path="/my-products" element={<MyProducts />}/>
-        <Route path="/login-admin" element={<LoginAdmin />}/>
+        <Route path="/login-admin" element={<IsAdminLogin> <LoginAdmin/> </IsAdminLogin>}/>
         <Route path="/register" element={<Register />}/>
         <Route path="/register-admin" element={<RegisterAdmin />}/>
         <Route path="/add-product" element={<AuthAdmin> <AddProduct/> </AuthAdmin>}/>

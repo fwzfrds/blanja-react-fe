@@ -27,9 +27,15 @@ export const loginUser = (loginData, navigate) => async (dispatch) => {
             text: `${result.data.message}`,
             icon: "success"
         });
-        // navigate('/home')
+        navigate('/')
 
     } catch (error) {
         console.log(error);
+        dispatch({ type: 'USER_LOGIN_ERROR' })
+        swal({
+            title: "Good job!",
+            text: `${error.response.data.message}`,
+            icon: "error",
+        });
     }
 }
