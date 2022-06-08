@@ -66,7 +66,8 @@ const GetProduct = () => {
         fethData()
     }, [searchParams])
 
-    console.log(products)
+    console.log('products data :')
+    console.log(products.data)
 
     const [currentPage, setcurrentPage] = useState(1)
 
@@ -100,7 +101,7 @@ const GetProduct = () => {
 
 
                 <div className={`${styles.products}`}>
-                    {products ? (products.data).map(item => (
+                    {products.data ? (products.data).map(item => (
                         <Card
                             to={`/detail-product/${item.id}`}
                             key={item.id}
