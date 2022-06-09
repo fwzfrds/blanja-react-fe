@@ -69,11 +69,9 @@ const GetProduct = () => {
 
     console.log('products data :')
     console.log(products.data)
-
-    const [currentPage, setcurrentPage] = useState(1)
+    console.log(searchParams)
 
     const handlePage = (page) => {
-        // console.log(e)
         console.log('Sedang menjalankan pagination...')
         fethData(page)
     }
@@ -91,51 +89,51 @@ const GetProduct = () => {
                 <div className={`${styles['actions-container']}`}>
                     <div className={`${styles['search-container']}`}>
                         <input type="text" name="search" placeholder="search" onChange={(e) => setSearch(e.target.value)} />
-                        {/* <button onClick={handleSearch}><i class="fa-solid fa-magnifying-glass"></i></button> */}
                         <Button
-                            text={<i class="fa-solid fa-magnifying-glass"></i>}
+                            text={<i className="fa-solid fa-magnifying-glass"></i>}
                             onClick={handleSearch}
-                            style={{ 
+                            style={{
                                 background: '#DB3022',
                                 color: '#FFF',
                                 border: '1px solid black',
                                 borderLeft: 'none',
                                 height: 30,
                                 borderRadius: '0 5px 5px 0'
-                             }}
+                            }}
                         />
                         {/* <p>hasil pencarian adalah = {searchParams.get('keyword')}</p> */}
                     </div>
                     <div className={`${styles['filter-container']}`}>
                         <h4>Price : </h4>
-                        <button onClick={()=>handleSort('asc')}><i class="fa-solid fa-down-long"></i></button>
-                        <button onClick={()=>handleSort('desc')}><i class="fa-solid fa-arrow-up"></i></button>
+                        <button onClick={() => handleSort('asc')}><i className="fa-solid fa-down-long"></i></button>
+                        <button onClick={() => handleSort('desc')}><i className="fa-solid fa-arrow-up"></i></button>
                     </div>
                 </div>
 
-
                 <div className={`${styles.products}`}>
-                    {products.data ? (products.data).map(item => (
-                        <Card
-                            to={`/detail-product/${item.id}`}
-                            className={`${styles['prod-card']}`}
-                        >
-                            <div className={`${styles['prod-img-container']}`}>
-                                <img src="./assets/img/suit-lscape.png" alt="suit" />
-                            </div>
-                            <div className={`${styles['prod-name-container']}`} key={item.id}>
-                                <h4 className={`${styles['prod-name']}`}>{item.name}</h4>
-                                <h4 className={`${styles['prod-price']}`}>Rp. {item.price}</h4>
-                                <h3 className={`${styles['store-name']}`}>Zalora CLoth</h3>
-                                <div className={`${styles['prod-rate']}`}>
-                                    <img src="./assets/img/icon/Star.png" alt="rating" />
-                                    <img src="./assets/img/icon/Star.png" alt="rating" />
-                                    <img src="./assets/img/icon/Star.png" alt="rating" />
-                                    <img src="./assets/img/icon/Star.png" alt="rating" />
-                                    <img src="./assets/img/icon/Star.png" alt="rating" />
+                    {products.data ? (products.data).map((item, idx) => (
+                        <React.Fragment key={idx}>
+                            <Card
+                                to={`/detail-product/${item.id}`}
+                                className={`${styles['prod-card']}`}
+                            >
+                                <div className={`${styles['prod-img-container']}`}>
+                                    <img src="./assets/img/suit-lscape.png" alt="suit" />
                                 </div>
-                            </div>
-                        </Card>
+                                <div className={`${styles['prod-name-container']}`}>
+                                    <h4 className={`${styles['prod-name']}`}>{item.name}</h4>
+                                    <h4 className={`${styles['prod-price']}`}>Rp. {item.price}</h4>
+                                    <h3 className={`${styles['store-name']}`}>Zalora CLoth</h3>
+                                    <div className={`${styles['prod-rate']}`}>
+                                        <img src="./assets/img/icon/Star.png" alt="rating" />
+                                        <img src="./assets/img/icon/Star.png" alt="rating" />
+                                        <img src="./assets/img/icon/Star.png" alt="rating" />
+                                        <img src="./assets/img/icon/Star.png" alt="rating" />
+                                        <img src="./assets/img/icon/Star.png" alt="rating" />
+                                    </div>
+                                </div>
+                            </Card>
+                        </React.Fragment>
                     )
                     ) :
                         <Loading />
@@ -152,12 +150,12 @@ const GetProduct = () => {
                         onClick={() => handlePage(2)}
                     >2
                     </button> */}
-                    {new Array(2).fill().map((item, index) => 
-                    <Button
-                        onClick={() => handlePage(index + 1)}
-                        text={index + 1}
-                    >
-                    </Button>)}
+                    {new Array(products.pagination.totalPage).fill().map((item, index) =>
+                        <Button
+                            onClick={() => handlePage(index + 1)}
+                            text={index + 1}
+                        >
+                        </Button>)}
                 </div>
             </div>
         </div>

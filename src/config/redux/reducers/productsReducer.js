@@ -28,6 +28,17 @@ const productsReducer = (state = initialState, action) => {
                 products: action.payload,
                 isLoading: false
             }
+        case 'DETAIL_PRODUCT_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'DETAIL_PRODUCT_SUCCESS':
+            return {
+                ...state,
+                products: action.payload,
+                isLoading: false
+            }
         case 'UPDATE_PRODUCT_PENDING':
             return {
                 ...state,

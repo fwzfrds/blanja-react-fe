@@ -5,7 +5,8 @@ import styles from './detailProduct.module.css'
 import Navbar from '../../../components/module/navbar/Navbar';
 import Button from '../../../components/base/button/button';
 import Card from '../../../components/base/card/card';
-import { useSelector } from 'react-redux'
+import { detailProduct } from '../../../config/redux/actions/productAction'
+import {  useDispatch, useSelector } from 'react-redux'
 
 const DetailProduct = () => {
 
@@ -13,29 +14,13 @@ const DetailProduct = () => {
     const [productData, setProductData] = useState(null)
     const { id } = useParams()
     const { isLoading, products } = useSelector((state) => state.products)
-
-    // console.log(productData)
-    // console.log(id)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        console.log('use effect run ...')
-        console.log(id)
-        console.log(typeof id)
-        const data = products.data
-        console.log(data)
-        const object = data.find(obj => obj.id === parseInt(id))
-        console.log(object)
-        setProductData(object)
+        console.log('dispatch run...');
+        dispatch(detailProduct(id))
+        setProductData(products)
     }, [])
-
-    // const object = products.find(obj => obj.id === parseInt(id))
-    // console.log(object)
-    // setProductData(object)
-
-    // console.log(products.data)
-    // console.log(productData)
-    // console.log(isLoading)
-    // console.log(products)
 
     return (
         <div>
@@ -44,10 +29,10 @@ const DetailProduct = () => {
             <nav className={`${styles['breadcrumb-container']}`}>
                 <ol className={`${styles.breadcrumb}`}>
                     <li className={`${styles['breadcrumb-item-home']}`}>
-                        <Link to="#">Home</Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li className={`${styles['breadcrumb-item']}`}>
-                        <Link to="#">Library</Link>
+                        <Link to="/get-products">Library</Link>
                     </li>
                     <li className={`${styles['breadcrumb-item']} ${styles.active}`}>{productData !== null ? productData.name : 'Data'}</li>
                 </ol>

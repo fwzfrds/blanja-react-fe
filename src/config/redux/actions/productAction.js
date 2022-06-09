@@ -17,6 +17,27 @@ export const getProducts = (page = 1, sortorder = 'asc') => async (dispatch) => 
     }
 }
 
+export const detailProduct = (id) => async (dispatch) => {
+    try {
+        dispatch({ type: 'DETAIL_PRODUCT_PENDING' })
+
+        const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/products//detail/${id}`)
+        console.log(result.data.data)
+        const products = result.data.data
+
+        dispatch({ type: 'DETAIL_PRODUCT_SUCCESS', payload: products })
+        // navigate('/home')
+
+    } catch (error) {
+        console.log(error);
+        swal({
+            title: "Get Detail Product Error!",
+            text: `${error.response.data.message}`,
+            icon: "error",
+        });
+    }
+}
+
 export const searchProducts = (search) => async (dispatch) => {
     try {
         dispatch({ type: 'GET_PRODUCTS_PENDING' })
