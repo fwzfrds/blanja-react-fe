@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect } from 'react'
 // import axios from 'axios';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useLocation } from 'react-router-dom'
 import styles from './detailProduct.module.css'
 import Navbar from '../../../components/module/navbar/Navbar';
 import Button from '../../../components/base/button/button';
@@ -12,15 +12,35 @@ const DetailProduct = () => {
 
 
     const [productData, setProductData] = useState(null)
+    const location = useLocation();
     const { id } = useParams()
-    const { isLoading, products } = useSelector((state) => state.products)
+    // const { isLoading, products } = useSelector((state) => state.products)
+    const { isLoading, productDetail } = useSelector((state) => state.productDetail)
+
     const dispatch = useDispatch()
 
+    // useEffect(() => {
+    //     console.log(`You changed the page to: ${location.pathname}`);
+    //     // getUser();
+    //   }, [location]);
+
     useEffect(() => {
-        console.log('dispatch run...');
+        console.log('dispatch run...')
+        console.log(`You changed the page to: ${location.pathname}`)
         dispatch(detailProduct(id))
-        setProductData(products)
-    }, [])
+        // console.log(products)
+        // setProductData(productDetail)
+    }, [location])
+
+    useLayoutEffect(() => {
+        console.log(productDetail)
+        setProductData(productDetail)
+    }, [productDetail])
+
+    // setProductData(products)
+
+    console.log(productDetail)
+    console.log(productData)
 
     return (
         <div>
@@ -211,6 +231,8 @@ const DetailProduct = () => {
                     </div> */}
                 </div>
             </section>
+
+            {/* <h1>{productData ? productData.name : 'Loading'}</h1> */}
 
         </div>
     )

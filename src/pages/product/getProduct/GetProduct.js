@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import styles from './products.module.css'
-import { NavLink, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import Card from '../../../components/base/card/card';
 import { getProducts, searchProducts } from '../../../config/redux/actions/productAction'
 import { useDispatch, useSelector } from 'react-redux'
@@ -11,7 +10,6 @@ import Button from '../../../components/base/button/button';
 
 const GetProduct = () => {
 
-    const [data, setData] = useState([])
     const { isLoading, products } = useSelector((state) => state.products)
     const dispatch = useDispatch()
 
@@ -37,7 +35,7 @@ const GetProduct = () => {
     const [search, setSearch] = useState('')
     let [searchParams, setSearchParams] = useSearchParams({});
     const handleSearch = () => {
-        const api = process.env.REACT_APP_API_BACKEND
+        // const api = process.env.REACT_APP_API_BACKEND
         setSearchParams({ keyword: search })
     }
     useEffect(() => {
@@ -111,29 +109,28 @@ const GetProduct = () => {
                 </div>
 
                 <div className={`${styles.products}`}>
-                    {products.data ? (products.data).map((item, idx) => (
-                        <React.Fragment key={idx}>
-                            <Card
-                                to={`/detail-product/${item.id}`}
-                                className={`${styles['prod-card']}`}
-                            >
-                                <div className={`${styles['prod-img-container']}`}>
-                                    <img src="./assets/img/suit-lscape.png" alt="suit" />
+                    {isLoading === false ? (products.data).map((item, idx) => (
+                        <Card
+                            to={`/detail-product/${item.id}`}
+                            key={item.id}
+                            className={`${styles['prod-card']}`}
+                        >
+                            <div className={`${styles['prod-img-container']}`}>
+                                <img src="./assets/img/suit-lscape.png" alt="suit" />
+                            </div>
+                            <div className={`${styles['prod-name-container']}`}>
+                                <h4 className={`${styles['prod-name']}`}>{item.name}</h4>
+                                <h4 className={`${styles['prod-price']}`}>Rp. {item.price}</h4>
+                                <h3 className={`${styles['store-name']}`}>Zalora CLoth</h3>
+                                <div className={`${styles['prod-rate']}`}>
+                                    <img src="./assets/img/icon/Star.png" alt="rating" />
+                                    <img src="./assets/img/icon/Star.png" alt="rating" />
+                                    <img src="./assets/img/icon/Star.png" alt="rating" />
+                                    <img src="./assets/img/icon/Star.png" alt="rating" />
+                                    <img src="./assets/img/icon/Star.png" alt="rating" />
                                 </div>
-                                <div className={`${styles['prod-name-container']}`}>
-                                    <h4 className={`${styles['prod-name']}`}>{item.name}</h4>
-                                    <h4 className={`${styles['prod-price']}`}>Rp. {item.price}</h4>
-                                    <h3 className={`${styles['store-name']}`}>Zalora CLoth</h3>
-                                    <div className={`${styles['prod-rate']}`}>
-                                        <img src="./assets/img/icon/Star.png" alt="rating" />
-                                        <img src="./assets/img/icon/Star.png" alt="rating" />
-                                        <img src="./assets/img/icon/Star.png" alt="rating" />
-                                        <img src="./assets/img/icon/Star.png" alt="rating" />
-                                        <img src="./assets/img/icon/Star.png" alt="rating" />
-                                    </div>
-                                </div>
-                            </Card>
-                        </React.Fragment>
+                            </div>
+                        </Card>
                     )
                     ) :
                         <Loading />
@@ -154,6 +151,7 @@ const GetProduct = () => {
                         <Button
                             onClick={() => handlePage(index + 1)}
                             text={index + 1}
+                            key={index}
                         >
                         </Button>)}
                 </div>

@@ -39,7 +39,7 @@ const RegisterAdmin = () => {
         text: `${result.data.message}`,
         icon: "success"
       });
-      navigate('/login')
+      navigate('/login-admin')
 
     } catch (error) {
 

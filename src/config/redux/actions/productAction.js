@@ -20,12 +20,13 @@ export const getProducts = (page = 1, sortorder = 'asc') => async (dispatch) => 
 export const detailProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: 'DETAIL_PRODUCT_PENDING' })
+        console.log('get detail product run...')
 
         const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/products//detail/${id}`)
-        console.log(result.data.data)
-        const products = result.data.data
+        // console.log(result.data.data)
+        const productDetail = result.data.data
 
-        dispatch({ type: 'DETAIL_PRODUCT_SUCCESS', payload: products })
+        dispatch({ type: 'DETAIL_PRODUCT_SUCCESS', payload: productDetail })
         // navigate('/home')
 
     } catch (error) {

@@ -3,7 +3,7 @@ const initialState = {
     isLoading: false
 }
 
-const productsReducer = (state = initialState, action) => {
+export const productsReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case 'ADD_PRODUCT_PENDING':
@@ -23,17 +23,6 @@ const productsReducer = (state = initialState, action) => {
                 isLoading: true
             }
         case 'GET_PRODUCTS_SUCCESS':
-            return {
-                ...state,
-                products: action.payload,
-                isLoading: false
-            }
-        case 'DETAIL_PRODUCT_PENDING':
-            return {
-                ...state,
-                isLoading: true
-            }
-        case 'DETAIL_PRODUCT_SUCCESS':
             return {
                 ...state,
                 products: action.payload,
@@ -66,44 +55,30 @@ const productsReducer = (state = initialState, action) => {
             return state
     }
 
-    // if (action.type === 'GET_PRODUCTS_PENDING') {
-    //     return {
-    //         ...state,
-    //         isLoading: true
-    //     }
-    // } else if (action.type === 'GET_PRODUCTS_SUCCESS') {
-    //     return {
-    //         ...state,
-    //         products: action.payload,
-    //         isLoading: false
-    //     }
-    // } else if (action.type === 'ADD_PRODUCT_PENDING') {
-    //     return {
-    //         ...state,
-    //         isLoading: true
-    //     }
-    // } else if (action.type === 'ADD_PRODUCT_SUCCESS') {
-    //     return {
-    //         ...state,
-    //         products: action.payload,
-    //         isLoading: false
-    //     }
-    // } else if (action.type === 'UPDATE_PRODUCT_PENDING') {
-    //     return {
-    //         ...state,
-    //         isLoading: true
-    //     }
-    // } else if (action.type === 'UPDATE_PRODUCT_SUCCESS') {
-    //     return {
-    //         ...state,
-    //         products: action.payload,
-    //         isLoading: false
-    //     }
-    // }
-
-    // else {
-    //     return state
-    // }
 }
 
-export default productsReducer
+const searchState = {
+    productDetail: {},
+    isLoading: false
+}
+
+export const detailProdReducer = (state = searchState, action) => {
+    switch (action.type) {
+        case 'DETAIL_PRODUCT_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'DETAIL_PRODUCT_SUCCESS':
+            // console.log(state.products)
+            return {
+                ...state,
+                productDetail: action.payload,
+                isLoading: false
+            }
+    
+        default:
+            return state
+    }
+}
+
