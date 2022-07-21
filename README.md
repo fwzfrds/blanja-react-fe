@@ -46,6 +46,10 @@ npm run build
 
 ## Screenshots
   
+<p align="center">
+  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658419961/blanja/screenshot/home-2_cimhr9.jpg" />
+  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658419961/blanja/screenshot/my-profile-2_wwclit.png" />
+</p>
 
 ## Backend
 * [`BACKEND REPO`](https://github.com/fwzfrds/blanja)
