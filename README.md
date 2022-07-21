@@ -1,7 +1,7 @@
 <h1 align="center">Blanja</h1>
 
 <p align="center">
-  <img height="150" src="/assets/img/logo/blanja-logo.png" />
+  <img height="150" src="./assets/img/logo/blanja-logo.png" />
 </p>
 <p align="center">
   Built with React Js.
@@ -59,7 +59,7 @@ npm run build
 <center>
   <table>
     <tr>
-      <th>Frontend</th>
+      <th>Owner</th>
     </tr>
     <tr>
       <td align="center">
