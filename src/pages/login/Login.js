@@ -44,7 +44,7 @@ const Login = () => {
             setIsInputValid({...isInputValid, email: ''})
         }
         
-        const localData = await localStorage.getItem('BlanjaAdmin')
+        const localData = localStorage.getItem('BlanjaAdmin')
             if (localData) {
                 return swal({
                     title: "Error",
@@ -54,45 +54,12 @@ const Login = () => {
             }
 
         dispatch(loginUser(loginData, navigate))
-        // try {
-
-        //     const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/users/login`, loginData)
-        //     console.log(result.data.data);
-        //     const dataLocal =  {
-        //         firstName: result.data.data.first_name,
-        //         lastName: result.data.data.last_name,
-        //         id: result.data.data.id,
-        //         email: result.data.data.email,
-        //         role: result.data.data.role,
-        //         token: result.data.data.token,
-        //         refreshToken: result.data.data.RefreshToken,
-        //     } 
-        //     console.log(dataLocal)
-        //     localStorage.setItem('BlanjaUser', JSON.stringify(dataLocal))
-        //     swal({
-        //         title: "Good job!",
-        //         text: `${result.data.message}`,
-        //         icon: "success"
-        //       });
-              
-        //     navigate('/product-list')
-
-        // } catch (error) {
-
-        //     console.log(error.response.data.message);
-        //     swal({
-        //         title: "Good job!",
-        //         text: `${error.response.data.message}`,
-        //         icon: "error",
-        //       });
-            
-        // }
 
     }
 
-    console.log(loginData)
-    console.log(isLoading)
-    console.log(isInputValid)
+    const navToSeller = () => {
+        navigate('/login-admin')
+    }
 
     return (
         <div className={`${styles.login} d-flex align-items-center justify-content-center`}>
@@ -105,7 +72,9 @@ const Login = () => {
 
                 <div className={`${styles.role} row mt-4 align-items-center justify-content-center text-center`}>
                     <p className={`${styles.customer} col-6`}>Customer</p>
-                    <p className={`${styles.seller} col-6`}>Seller</p>
+                    <p className={`${styles.seller} col-6`}
+                        onClick={navToSeller}
+                    >Seller</p>
                 </div>
 
                 <form id='my-form' onSubmit={handleSubmit} className={`input-container row mt-4 justify-content-center ${styles['input-container']}`}>

@@ -7,13 +7,7 @@ export const loginAdmin = (loginData, navigate) => async (dispatch) => {
         const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/admin/login`, loginData)
         const admin = result.data.data
 
-        const dataLocal = {
-            name: result.data.data.name,
-            id: result.data.data.id,
-            email: result.data.data.email,
-            role: result.data.data.role,
-            token: result.data.data.token,
-        }
+        const dataLocal = admin
 
         console.log(dataLocal)
         localStorage.setItem('BlanjaAdmin', JSON.stringify(dataLocal))

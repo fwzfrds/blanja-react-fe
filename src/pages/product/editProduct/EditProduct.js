@@ -4,24 +4,31 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import styles from './editProduct.module.css'
 import swal from 'sweetalert';
 import Navbar from '../../../components/module/navbar/Navbar'
-import {updateProduct} from '../../../config/redux/actions/productAction'
-import {useDispatch, useSelector} from 'react-redux'
+import { updateProduct } from '../../../config/redux/actions/productAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const EditProduct = (props) => {
 
     const navigate = useNavigate()
     const { id } = useParams()
     const dispatch = useDispatch()
-
-    const {isLoading, products} = useSelector((state)=>state.products)
-
-
+    const { isLoading, products } = useSelector((state) => state.products)
+    const [categories, setCategories] = useState('')
     const [localData, setLocalData] = useState([])
+
+    const fetchCategories = async () => {
+        try {
+            const res = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/categories/`)
+            setCategories(res.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         const dataFromLocal = JSON.parse(localStorage.getItem('BlanjaAdmin'))
-        console.log(dataFromLocal.token)
         setLocalData(dataFromLocal.token)
+        fetchCategories()
     }, []);
 
     const [data, setData] = useState({
@@ -32,76 +39,91 @@ const EditProduct = (props) => {
         idCategory: 0,
     })
 
-    const [image, setImage] = useState('http://fakeimg.pl/190x190')
+    const [updateData, setUpdateData] = useState('')
 
-    const [saveImg, setSaveImg] = useState(null)
+    const [image, setImage] = useState([])
+
+    const [saveImg, setSaveImg] = useState('')
 
     useEffect(() => {
         const fethData = async () => {
             // dispatch(updateProduct(id))
 
             try {
-                const product_id = id;
-                console.log(product_id)
-                const result = await axios.get(`http://localhost:5000/v1/products/detail/${product_id}`)
-                console.log('Get Products Success!');
-                // console.log(result.data);
-                setData(result.data.data)
+                const product_id = id
+                const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/products/detail/${product_id}`)
+                const data = result.data.data
+                setData(data)
+                setImage(data.image)
             } catch (error) {
-                console.log(error);
-                console.log('Fetching Data Error!');
+                console.log(error)
             }
         }
         fethData()
     }, [])
 
-    console.log(data);
+    // console.table(updateData)
 
     const handleUploadChange = (e) => {
-        console.log(e.target.files[0]);
-        let uploaded = e.target.files[0]
-        console.log(URL.createObjectURL(uploaded));
-        setImage(URL.createObjectURL(uploaded))
-        setSaveImg(uploaded)
+        // console.log(e.target.files[0]);
+        // let uploaded = e.target.files[0]
+        // console.log(URL.createObjectURL(uploaded));
+        // setImage(URL.createObjectURL(uploaded))
+        // setSaveImg(uploaded)
+        if (Object.keys(e.target.files).length > 1) {
+            const files = e.target.files
+            Object.keys(files).forEach(file => {
+                setImage((current) => [...current, URL.createObjectURL(files[file])])
+            })
+            setSaveImg(e.target.files)
+        } else {
+            setImage([URL.createObjectURL(e.target.files[0])])
+            setSaveImg(e.target.files[0])
+        }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         let formData = new FormData()
-        if(saveImg === null) {
+        if (!saveImg) {
             formData.append('photo', undefined)
         } else {
-            formData.append('photo', saveImg)
+            if (Object.keys(saveImg).length > 1) {
+                const images = saveImg
+                Object.keys(images).forEach((image) => {
+                    formData.append(`photo`, images[image])
+                })
+            } else {
+                if(saveImg) {
+                    formData.append('photo', saveImg)
+                }
+            }
         }
 
-        formData.append('name', data.name)
-        formData.append('description', data.description)
-        formData.append('qty', data.qty)
-        formData.append('price', data.price)
-        formData.append('idCategory', data.id_category)
-
-        console.log(formData.get('name'))
-        console.log(formData.get('description'))
-        console.log(formData.get('qty'))
-        console.log(formData.get('price'))
-        console.log(formData.get('idCategory'))
-        console.log(formData.get('photo'))
+        if(updateData.name){
+            formData.append('name', updateData.name)
+        }
+        if(updateData.description) {
+            formData.append('description', updateData.description)
+        }
+        if(updateData.qty) {
+            formData.append('qty', updateData.qty)
+        }
+        if(updateData.price) {
+            formData.append('price', updateData.price)
+        }
+        if(updateData.idCategory) {
+            formData.append('idCategory', updateData.idCategory)
+        }
+        if(updateData.condition) {
+            formData.append('condition', updateData.condition)
+        }
 
         try {
             dispatch(updateProduct(formData, localData, id))
-            // const result = await axios.put(`http://localhost:5000/v1/products/edit/${id}`, formData, {
-            //     headers: { Authorization: `Bearer ${localData.token}` }
-            // })
-            // console.log(result);
-            // swal({
-            //     title: "Good job!",
-            //     text: `${result.data.message}`,
-            //     icon: "success"
-            // });
-            // navigate('/product-list')
         } catch (error) {
-            console.log(error.response.data.message);
+            console.log(error)
             swal({
                 title: "Update Error!",
                 text: `${error.response.data.message}`,
@@ -111,24 +133,30 @@ const EditProduct = (props) => {
     }
 
     const handleInput = (e) => {
-        e.persist();
+        e.persist()
 
         let target = [e.target.name]
 
-        console.log(target[0]);
+        // console.log(target[0]);
 
         if (target[0] === 'qty' || target[0] === 'price' || target[0] === 'idCategory') {
             let value = parseInt(e.target.value)
-            setData({ ...data, [e.target.name]: value });
+            setUpdateData({ ...updateData, [e.target.name]: value })
             console.log(value);
         } else {
-            setData({ ...data, [e.target.name]: e.target.value });
+            setUpdateData({ ...updateData, [e.target.name]: e.target.value })
         }
 
     }
 
-    console.log(data);
-    console.log(products)
+    const delCurrentImage = () => {
+        setImage([])
+    }
+
+    // console.log(data)
+    console.log(updateData)
+    console.log(saveImg)
+    // console.log(products)
 
     // Edit Berhasil Lanjut Delete
 
@@ -186,7 +214,7 @@ const EditProduct = (props) => {
                         <hr className={`${styles['hr-invent']}`} />
                         <div className={`${styles['invent-form']}`}>
                             <label htmlFor="invent">Name of Goods</label>
-                            <input type="text" id="invent" name='name' onChange={handleInput} value={data.name} />
+                            <input type="text" id="invent" name='name' onChange={handleInput} placeholder={data?.name} />
                         </div>
                     </div>
                     <div className={`${styles['item-details']}`}>
@@ -194,25 +222,34 @@ const EditProduct = (props) => {
                         <hr className={`${styles['hr-invent']}`} />
                         <div className={`${styles['unit-price']}`}>
                             <label htmlFor="price">Unit Price</label>
-                            <input type="number" id="price" name='price' onChange={handleInput} value={data.price} />
+                            <input type="number" id="price" name='price' onChange={handleInput} placeholder={data.price} />
                         </div>
                         <div className={`${styles['unit-category']}`}>
-                            <label htmlFor="category">Category</label>
-                            <input type="number" id="category" name='idCategory' onChange={handleInput} value={data['id_category']} />
+                            <label htmlFor="category">Category: {data?.name_category}</label>
+                            {/* <input type="number" id="category" name='idCategory' onChange={handleInput} value={data['id_category']} /> */}
+                            <select name="idCategory" id="category" onChange={handleInput}>
+                                <option value={0}>Select Category</option>
+                                {categories && categories.map(({ id, name }, idx) => {
+                                    return (
+                                        <option key={idx} value={id}>{name}</option>
+                                    )
+                                })}
+                                {/* <option value="2">Suit</option> */}
+                            </select>
                         </div>
                         <div className={`${styles['unit-qty']}`}>
                             <label htmlFor="stock">Stock</label>
-                            <input type="number" id="stock" name='qty' onChange={handleInput} value={data.qty} />
+                            <input type="number" id="stock" name='qty' onChange={handleInput} placeholder={data.qty} />
                         </div>
                         <div className={`${styles['unit-qty-radio']}`}>
                             <label>Stock</label>
                             <div className={`${styles['radio-buttons']}`}>
                                 <div className={`${styles['new-radio']}`}>
-                                    <input type="radio" id="new" name="radio" />
+                                    <input type="radio" checked={data?.condition === 'baru'} value='baru' id="condition" name="condition" onChange={handleInput} />
                                     <label htmlFor="new">Baru</label>
                                 </div>
                                 <div className={`${styles['new-radio']}`}>
-                                    <input type="radio" id="new" name="radio" />
+                                    <input type="radio" checked={data?.condition === 'bekas'} value='bekas' id="condition" name="condition" onChange={handleInput} />
                                     <label htmlFor="new">Bekas</label>
                                 </div>
                             </div>
@@ -225,26 +262,26 @@ const EditProduct = (props) => {
                             <div className={`${styles['photos-area']}`}>
                                 <div className={`${styles['main-photo']}`}>
                                     <div className={`${styles['photo-container']}`}>
-                                        <img src={image} alt="" />
+                                        <img src={image.length > 0 ? image[0] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
                                     <p>Foto Utama</p>
                                 </div>
                                 <div className={`${styles.photos}`}>
                                     <div className={`${styles.photo}`}>
-                                        <img src="/assets/img/icon/box-md.png" alt="" />
+                                        <img src={image[1] ? image[1] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
                                     <div className={`${styles.photo}`}>
-                                        <img src="/assets/img/icon/box-md.png" alt="" />
+                                        <img src={image[2] ? image[2] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
                                     <div className={`${styles.photo}`}>
-                                        <img src="/assets/img/icon/box-md.png" alt="" />
+                                        <img src={image[3] ? image[3] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
                                     <div className={`${styles.photo}`}>
-                                        <img src="/assets/img/icon/box-md.png" alt="" />
+                                        <img src={image[4] ? image[4] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
                                 </div>
                             </div>
-                            <input type="file" className='img_input' accept='image/*' onChange={handleUploadChange} />
+                            <input type="file" multiple className='img_input' accept='image/*' onClick={delCurrentImage} onChange={handleUploadChange} />
                             <hr className={`${styles['hr-photo']}`} />
                             <button className={`${styles['photo-btn']}`}>Upload foto</button>
                         </div>

@@ -6,25 +6,38 @@ import swal from 'sweetalert';
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import styles from './navbar.module.css'
-import LinkButton from '../../base/linkButton/LinkButton';
+import LinkButton from '../../base/linkButton/LinkButton'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
 
+  const { user } = useSelector((state) => state.user)
+  const { admin } = useSelector((state) => state.admin)
   const [show, setShow] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
+  const [isLogout, setIsLogout] = useState(false)
+  const [whoIsLogin, setWhoIsLogin] = useState('')
+  const [photo, setPhoto] = useState('')
   const navigate = useNavigate()
 
   useEffect(() => {
-    const localData = localStorage.getItem('BlanjaUser')
-    if (localData) {
-      setIsLogin(true)
+    if(whoIsLogin) {
+      whoIsLogin === 'user' && setPhoto(user.photo)
+      whoIsLogin === 'admin' && setPhoto(admin.photo)
     }
-  }, [])
+  }, [whoIsLogin, admin.photo, user.photo])
 
   useEffect(() => {
-    const localData = localStorage.getItem('BlanjaAdmin')
-    if (localData) {
+
+    const userFromLocal = localStorage.getItem('BlanjaUser')
+    const adminFromLocal = localStorage.getItem('BlanjaAdmin')
+
+    if (userFromLocal) {
       setIsLogin(true)
+      setWhoIsLogin('user')
+    } else if (adminFromLocal) {
+      setIsLogin(true)
+      setWhoIsLogin('admin')
     }
   }, [])
 
@@ -35,21 +48,48 @@ const Navbar = () => {
     setShow(false)
   }
 
-  const handleLogout = async () => {
-    await localStorage.removeItem('BlanjaUser')
-    setIsLogin(false)
+  const handleLogout = () => {
     swal({
-      title: "Log Out",
-      text: `Log Out Success`,
-      icon: "success"
-    });
-
-    navigate('/login')
-
-    // setTimeout(() => {
-    //   navigate('/login')
-    // }, 1000);
+      title: "Logout",
+      text: `Are you sure want to logout?`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true
+    }).then(async (isOkay) => {
+      if (isOkay) {
+        if (localStorage.getItem('BlanjaUser')) {
+          localStorage.removeItem('BlanjaUser')
+          setIsLogin(false)
+          setIsLogout('user')
+        } else {
+          localStorage.removeItem('BlanjaAdmin')
+          setIsLogin(false)
+          setIsLogout('admin')
+        }
+      }
+    })
   }
+
+  useEffect(() => {
+    if (isLogout === 'user') {
+      swal({
+        title: "Log Out",
+        text: `Log Out Success`,
+        icon: "success"
+      })
+      navigate('/login')
+    } else if (isLogout === 'admin') {
+      swal({
+        title: "Log Out",
+        text: `Log Out Success`,
+        icon: "success"
+      })
+      navigate('/login-admin')
+    }
+  }, [isLogout, navigate])
+
+  console.log(whoIsLogin)
+  console.log(photo)
 
   return (
     <nav className={`navbar navbar-expand-lg shadow-sm ${styles.navbar}`}>
@@ -87,7 +127,7 @@ const Navbar = () => {
                 className={`${styles.signin}`}
                 navigateTo='/login'
               />
-              
+
               {/* <button className={`${styles.signup}`}>Sign Up</button> */}
               <LinkButton
                 text='Sing Up'
@@ -111,11 +151,13 @@ const Navbar = () => {
               <li className="nav-item">
                 <div className="dropdown d-flex justify-content-center align-items-center">
                   <Link className={`account-dropdown text-decoration-none dropdown-toggle p-2 rounded-circle ${styles['account-dropdown']}`} to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="/assets/img/icon/account-icon.png" alt="" />
+                    <div>
+                      <img src={photo ? photo : `/assets/img/photo.webp`} alt="" />
+                    </div>
                   </Link>
 
                   <ul className={`user-dropdown dropdown-menu ${styles['user-dropdown']} ${styles['dropdown-menu']} ${styles['show']}`} aria-labelledby="dropdownMenuLink">
-                    <li><Link className={`${styles['dropdown-item']}`} to="#">My Account</Link></li>
+                    <li><Link className={`${styles['dropdown-item']}`} to="/user-profile">My Account</Link></li>
                     <li><Link className={`${styles['dropdown-item']}`} to="#">Shopping Address</Link></li>
                     <li><Link className={`${styles['dropdown-item']}`} to="#">My Order</Link></li>
                     <li>

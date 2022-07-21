@@ -32,7 +32,7 @@ const RegisterAdmin = () => {
 
     try {
 
-      const result = await axios.post(`http://localhost:5000/v1/admin/registration`, data)
+      const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/admin/registration`, data)
       console.log(result.data.message);
       swal({
         title: "Good job!",
@@ -54,6 +54,10 @@ const RegisterAdmin = () => {
 
   }
 
+  const navToUser = () => {
+    navigate('/register')
+  }
+
   return (
     <div className={`${styles.register} container-fluid d-flex align-items-center justify-content-center px-0`}>
       <div className="container d-flex flex-column justify-content-center align-items-center m-0 py-5 px-0">
@@ -64,7 +68,9 @@ const RegisterAdmin = () => {
         <h4 className={`${styles.text1} text-center mt-4 fs-5`}>Please Sign Up with your account</h4>
 
         <div className={`${styles.role} row mt-4 align-items-center justify-content-center text-center`}>
-          <p className={`${styles.customer} col-6`}>Customer</p>
+          <p className={`${styles.customer} col-6`}
+            onClick={navToUser}
+          >Customer</p>
           <p className={`${styles.seller} col-6`}>Seller</p>
         </div>
 
@@ -84,7 +90,7 @@ const RegisterAdmin = () => {
           className={`${styles.button1} btn rounded-pill text-white mt-4`}
         />
 
-        <p className={`${styles.text2} mt-4`}>Already have a Blanja account? <Link to="/login" class="text-decoration-none">Login</Link></p>
+        <p className={`${styles.text2} mt-4`}>Already have a Blanja account? <Link to="/login-admin" class="text-decoration-none">Login</Link></p>
 
       </div>
     </div>

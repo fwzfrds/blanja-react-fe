@@ -69,7 +69,7 @@ const MyProducts = () => {
                     </div>
                 </div>
                 <div className={`${styles['product-data']}`}>
-                    <div>
+                    <div className={`${styles.list_product}`}>
                         <ProductList />
                     </div>
                     <div className={`${styles['btn-container']}`}>

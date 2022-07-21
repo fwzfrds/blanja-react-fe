@@ -41,7 +41,7 @@ const ProductsData = () => {
                 <h3 className={`${styles['new-title']}`}>New</h3>
                 <p className={`${styles['new-text']}`}>You've never seen it before</p>
                 <div className={`${styles.products}`}>
-                    {isLoading === false ? (products.data).map(item => (
+                    {isLoading === false ? (products.data)?.map(item => (
                         <Card
                             to={`/detail-product/${item.id}`}
                             key={item.id}
@@ -65,7 +65,12 @@ const ProductsData = () => {
                         </Card>
                     )
                     ) :
-                    <Loading />
+                    <Loading 
+                        style={{ 
+                            position: 'absolute',
+                            width: '90vw'
+                         }}
+                    />
                     }
                 </div>
             </div>

@@ -63,38 +63,10 @@ const LoginAdmin = () => {
 
         dispatch(loginAdmin(loginData, navigate))
 
-        // try {
+    }
 
-        //     const result = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/admin/login`, data)
-        //     console.log(result.data.data);
-        //     const dataLocal = {
-        //         name: result.data.data.name,
-        //         id: result.data.data.id,
-        //         email: result.data.data.email,
-        //         role: result.data.data.role,
-        //         token: result.data.data.token,
-        //     }
-        //     console.log(dataLocal)
-        //     localStorage.setItem('BlanjaAdmin', JSON.stringify(dataLocal))
-        //     swal({
-        //         title: "Good job!",
-        //         text: `${result.data.message}`,
-        //         icon: "success"
-        //     });
-
-        //     navigate('/product-list')
-
-        // } catch (error) {
-
-        //     console.log(error.response.data.message);
-        //     swal({
-        //         title: "Good job!",
-        //         text: `${error.response.data.message}`,
-        //         icon: "error",
-        //     });
-
-        // }
-
+    const navToUser = () => {
+        navigate('/login')
     }
 
     return (
@@ -107,7 +79,9 @@ const LoginAdmin = () => {
                 <h4 className={`${styles.text1} text-center mt-4 fs-5`}>Please login with your account</h4>
 
                 <div className={`${styles.role} row mt-4 align-items-center justify-content-center text-center`}>
-                    <p className={`${styles.customer} col-6`}>Customer</p>
+                    <p className={`${styles.customer} col-6`}
+                        onClick={navToUser}
+                    >Customer</p>
                     <p className={`${styles.seller} col-6`}>Seller</p>
                 </div>
 
@@ -132,7 +106,7 @@ const LoginAdmin = () => {
                     className={`${styles.button1} btn rounded-pill text-white mt-4`}
                 />
 
-                <p className={`${styles.text2} mt-4`}>Don't have a Blanja account? <Link to='/register' className="text-decoration-none">Register</Link></p>
+                <p className={`${styles.text2} mt-4`}>Don't have a Blanja account? <Link to='/register-admin' className="text-decoration-none">Register</Link></p>
 
             </div>
         </div>

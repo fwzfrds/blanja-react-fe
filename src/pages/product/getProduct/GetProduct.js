@@ -133,7 +133,12 @@ const GetProduct = () => {
                         </Card>
                     )
                     ) :
-                        <Loading />
+                        <Loading
+                            style={{
+                                position: 'absolute',
+                                width: '90vw'
+                            }}
+                        />
                     }
                 </div>
                 <div className={`${styles['page-container']}`}>

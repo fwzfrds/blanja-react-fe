@@ -27,6 +27,39 @@ const userReducer = (state = initialState, action) => {
                 isLoading: false
             }
 
+        case 'USER_REGISTER_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'USER_REGISTER_SUCCESS':
+            return {
+                ...state,
+                isLoading: false
+            }
+        case 'USER_REGISTER_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
+        case 'USER_UPDATE_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
+        case 'USER_UPDATE_SUCCESS':
+            return {
+                ...state,
+                isLoading: false,
+                user: action.payload
+            }
+        case 'USER_UPDATE_ERROR':
+            return {
+                ...state,
+                isLoading: false
+            }
+
         default:
             return state
     }

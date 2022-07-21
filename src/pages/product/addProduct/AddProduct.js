@@ -6,41 +6,51 @@ import swal from 'sweetalert';
 import Navbar from '../../../components/module/navbar/Navbar'
 import Button from '../../../components/base/button/button';
 import Input from '../../../components/base/input/input';
-import {addProduct} from '../../../config/redux/actions/productAction'
-import {useDispatch, useSelector} from 'react-redux'
+import { addProduct } from '../../../config/redux/actions/productAction'
+import { useDispatch, useSelector } from 'react-redux'
 
 const AddProduct = () => {
 
     const navigate = useNavigate()
     const [authToken, setAuthToken] = useState([]);
     const dispatch = useDispatch()
+    const [categories, setCategories] = useState('')
 
+    const fetchCategories = async () => {
+        try {
+            const res = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/categories/`)
+            setCategories(res.data.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
-        // const token = localStorage.getItem('BlanjaAdmin')
         const dataFromLocal = JSON.parse(localStorage.getItem('BlanjaAdmin'))
-        console.log(dataFromLocal.token);
         setAuthToken(dataFromLocal.token)
+        fetchCategories()
     }, []);
 
     const [data, setData] = useState({
         name: '',
-        description: '',
-        qty: 0,
-        price: 0,
-        idCategory: 0,
+        description: ''
     })
 
-    const [image, setImage] = useState('http://fakeimg.pl/190x190')
+    const [image, setImage] = useState([])
 
-    const [saveImg, setSaveImg] = useState(null)
+    const [saveImg, setSaveImg] = useState('')
 
     const handleUploadChange = (e) => {
-        console.log(e.target.files[0]);
-        let uploaded = e.target.files[0]
-        console.log(URL.createObjectURL(uploaded));
-        setImage(URL.createObjectURL(uploaded))
-        setSaveImg(uploaded)
+        if (Object.keys(e.target.files).length > 1) {
+            const files = e.target.files
+            Object.keys(files).forEach(file => {
+                setImage((current) => [...current, URL.createObjectURL(files[file])])
+            })
+            setSaveImg(e.target.files)
+        } else {
+            setImage([URL.createObjectURL(e.target.files[0])])
+            setSaveImg(e.target.files[0])
+        }
     }
 
     const handleSubmit = async (e) => {
@@ -54,26 +64,24 @@ const AddProduct = () => {
             });
         } else {
             let formData = new FormData()
-            formData.append('photo', saveImg)
+            if (Object.keys(saveImg).length > 1) {
+                const images = saveImg
+                Object.keys(images).forEach((image) => {
+                    formData.append(`photo`, images[image])
+                })
+            } else {
+                formData.append('photo', saveImg)
+            }
 
             formData.append('name', data.name)
             formData.append('description', data.description)
             formData.append('qty', data.qty)
             formData.append('price', data.price)
             formData.append('idCategory', data.idCategory)
+            formData.append('condition', data.condition)
 
             try {
-                dispatch(addProduct(formData, authToken))
-                // const result = await axios.post('http://localhost:5000/v1/products/add', formData, {
-                //     headers: { Authorization: `Bearer ${authToken}` }
-                // })
-                // console.log(result);
-                // swal({
-                //     title: "Good job!",
-                //     text: `Data Tersimpan`,
-                //     icon: "success"
-                // });
-                // navigate('/')
+                dispatch(addProduct(formData, authToken, navigate))
             } catch (error) {
                 console.log(error.response.data.message);
                 swal({
@@ -86,23 +94,23 @@ const AddProduct = () => {
     }
 
     const handleInput = (e) => {
-        e.persist();
+        e.persist()
 
         let target = [e.target.name]
 
-        console.log(target[0]);
 
         if (target[0] === 'qty' || target[0] === 'price' || target[0] === 'idCategory') {
             let value = parseInt(e.target.value)
-            setData({ ...data, [e.target.name]: value });
-            console.log(value);
+            setData({ ...data, [e.target.name]: value })
         } else {
-            setData({ ...data, [e.target.name]: e.target.value });
+            setData({ ...data, [e.target.name]: e.target.value })
         }
-
     }
 
-    console.log(data);
+    console.log(data)
+    console.log(categories)
+    // console.log(image)
+    // console.log(saveImg)
 
     return (
         <div>
@@ -169,7 +177,16 @@ const AddProduct = () => {
                         </div>
                         <div className={`${styles['unit-category']}`}>
                             <label htmlFor="category">Category</label>
-                            <Input type="number" id="category" name='idCategory' onChange={handleInput} />
+                            {/* <Input type="number" id="category" name='idCategory' onChange={handleInput} /> */}
+                            <select name="idCategory" id="category" onChange={handleInput}>
+                                <option value={0}>Select Category</option>
+                                {categories && categories.map(({ id, name }, idx) => {
+                                    return (
+                                        <option key={idx} value={id}>{name}</option>
+                                    )
+                                })}
+                                {/* <option value="2">Suit</option> */}
+                            </select>
                         </div>
                         <div className={`${styles['unit-qty']}`}>
                             <label htmlFor="stock">Stock</label>
@@ -179,11 +196,11 @@ const AddProduct = () => {
                             <label>Stock</label>
                             <div className={`${styles['radio-buttons']}`}>
                                 <div className={`${styles['new-radio']}`}>
-                                    <input type="radio" id="new" name="radio" />
+                                    <input type="radio" value='baru' id="condition" name="condition" onChange={handleInput} />
                                     <label htmlFor="new">Baru</label>
                                 </div>
                                 <div className={`${styles['new-radio']}`}>
-                                    <input type="radio" id="new" name="radio" />
+                                    <input type="radio" value='bekas' id="condition" name="condition" onChange={handleInput} />
                                     <label htmlFor="new">Bekas</label>
                                 </div>
                             </div>
@@ -196,26 +213,27 @@ const AddProduct = () => {
                             <div className={`${styles['photos-area']}`}>
                                 <div className={`${styles['main-photo']}`}>
                                     <div className={`${styles['photo-container']}`}>
-                                        <img src={image} alt="" />
+                                        <img src={image.length > 0 ? image[0] : 'https://fakeimg.pl/350x200/?text=Image'} alt="main" />
                                     </div>
                                     <p>Foto Utama</p>
                                 </div>
                                 <div className={`${styles.photos}`}>
                                     <div className={`${styles.photo}`}>
-                                        <img src="./assets/img/icon/box-md.png" alt="" />
+                                        <img src={image[1] ? image[1] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
                                     <div className={`${styles.photo}`}>
-                                        <img src="./assets/img/icon/box-md.png" alt="" />
+                                        <img src={image[2] ? image[2] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
                                     <div className={`${styles.photo}`}>
-                                        <img src="./assets/img/icon/box-md.png" alt="" />
+                                        <img src={image[3] ? image[3] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
                                     <div className={`${styles.photo}`}>
-                                        <img src="./assets/img/icon/box-md.png" alt="" />
+                                        <img src={image[4] ? image[4] : 'https://fakeimg.pl/350x200/?text=Image'} alt="" />
                                     </div>
+
                                 </div>
                             </div>
-                            <input type="file" className='img_input' accept='image/*' onChange={handleUploadChange} />
+                            <input type="file" multiple className='img_input' accept='image/*' onChange={handleUploadChange} />
                             <hr className={`${styles['hr-photo']}`} />
                             <button className={`${styles['photo-btn']}`}>Upload foto</button>
                         </div>
@@ -231,13 +249,13 @@ const AddProduct = () => {
                     </div>
                     <div className={`${styles['btn-container']}`}>
                         {/* <button className={`${styles['sell-btn']}`} onClick={handleSubmit} >Jual</button> */}
-                        <Button 
-                        className={`${styles['sell-btn']}`}
-                        text='Sell'
-                        onClick={handleSubmit}
-                    />
+                        <Button
+                            className={`${styles['sell-btn']}`}
+                            text='Sell'
+                            onClick={handleSubmit}
+                        />
                     </div>
-                    
+
                 </div>
             </div>
         </div>

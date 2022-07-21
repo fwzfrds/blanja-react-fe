@@ -51,7 +51,7 @@ export const searchProducts = (search) => async (dispatch) => {
         // navigate('/home')
 
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
 }
 
@@ -59,7 +59,7 @@ export const updateProduct = (formData, localData, id) => async (dispatch) => {
     try {
         dispatch({ type: 'UPDATE_PRODUCT_PENDING' })
 
-        const result = await axios.put(`http://localhost:5000/v1/products/edit/${id}`, formData, {
+        const result = await axios.put(`${process.env.REACT_APP_API_BACKEND}/v1/products/edit/${id}`, formData, {
             headers: { Authorization: `Bearer ${localData}` }
         })
         console.log(result);
@@ -80,7 +80,7 @@ export const updateProduct = (formData, localData, id) => async (dispatch) => {
     }
 }
 
-export const addProduct = (formData, authToken) => async (dispatch) => {
+export const addProduct = (formData, authToken, navigate) => async (dispatch) => {
     try {
         dispatch({ type: 'ADD_PRODUCT_PENDING' })
 
@@ -99,7 +99,7 @@ export const addProduct = (formData, authToken) => async (dispatch) => {
 
         dispatch({ type: 'ADD_PRODUCT_SUCCESS', payload: products })
 
-        // navigate('/')
+        navigate('/')
 
     } catch (error) {
         console.log(error.response.data.message);

@@ -47,15 +47,6 @@ const ProductList = () => {
 
         try {
             dispatch(deleteProduct(authToken,id))
-            // const result = await axios.delete(`http://localhost:5000/v1/products/${id}`, {
-            //     headers: { Authorization: `Bearer ${authToken}` }
-            // })
-            // swal({
-            //     title: "Success",
-            //     text: 'Delete Product Success',
-            //     icon: "success",
-            //     button: "OK!",
-            // });
             thisClicked.closest("tr").remove();
         } catch (error) {
             console.log(error.response.data.message);

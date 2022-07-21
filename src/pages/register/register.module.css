@@ -65,7 +65,9 @@
 }
 
 .input-container {
-    width: 400px;
+    width: 70%;
+    /* background: red; */
+    gap: 20px;
 }
 
 .register a {

@@ -183,10 +183,20 @@
 
 /* Product Data */
 .product-data {
-    width: 72.57%;
+    flex: 1 1 auto;
+    /* width: 72.57%; */
     min-height: 100vh;
     margin-left: 374.69px;
     background: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.list_product {
+    width: 90%;
+    /* background: green; */
+    margin-top: 100px;
 }
 
 .sell-btn {
