@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react'
-import styles from './productsData.module.css'
+import styles from './ProductsData.module.css'
 // import { Link, useSearchParams } from 'react-router-dom'
 import Card from '../../../components/base/card/card';
-import {getProducts} from '../../../config/redux/actions/productAction'
-import {useDispatch, useSelector} from 'react-redux'
+import { getProducts } from '../../../config/redux/actions/productAction'
+import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../../../components/module/navbar/Navbar';
 import Loading from '../../../components/base/loading/Loading';
 
 const ProductsData = () => {
 
     // const [data, setData] = useState([])
-    const {isLoading, products} = useSelector((state)=>state.products)
+    const { isLoading, products } = useSelector((state) => state.products)
     const dispatch = useDispatch()
 
     const fethData = async () => {
@@ -48,7 +48,9 @@ const ProductsData = () => {
                             className={`${styles['prod-card']}`}
                         >
                             <div className={`${styles['prod-img-container']}`}>
-                                <img src="./assets/img/suit-lscape.png" alt="suit" />
+                                <div className={`${styles.prod_img}`}>
+                                    <img src={item.image ? item.image[0] : `https://fakeimg.pl/400x400/?text=product`} alt="suit" />
+                                </div>
                             </div>
                             <div className={`${styles['prod-name-container']}`}>
                                 <h4 className={`${styles['prod-name']}`}>{item.name}</h4>
@@ -65,12 +67,12 @@ const ProductsData = () => {
                         </Card>
                     )
                     ) :
-                    <Loading 
-                        style={{ 
-                            position: 'absolute',
-                            width: '90vw'
-                         }}
-                    />
+                        <Loading
+                            style={{
+                                position: 'absolute',
+                                width: '90vw'
+                            }}
+                        />
                     }
                 </div>
             </div>

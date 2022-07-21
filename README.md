@@ -1,70 +1,108 @@
-# Getting Started with Create React App
+<h1 align="center">ANKASA TICKETING</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+  <img height="150" src="https://i.ibb.co/WFZVxPb/arkasa-logo.png"  />
+</p>
+<p align="center">
+  Built with React Js.
+</p>
 
-## Available Scripts
+## About
+ANKASA TICKETING is an online ticketing website that provides various features for online plane ticket reservations. Created by the Fantastic Six team. Built with React JS, Express JS, and Postgree SQL.
 
-In the project directory, you can run:
+## Dependencies
+- [React Js](https://(https://reactjs.org)/)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Bootstrap](https://www.npmjs.com/package/bootstrap)
+- [Sweetalert](https://www.npmjs.com/package/sweetalert)
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+- [Redux](https://www.npmjs.com/package/redux)
+- [React-redux](https://www.npmjs.com/package/react-redux)
+- [Redux-logger](https://www.npmjs.com/package/redux-logger)
+- [Redux-thunk](https://www.npmjs.com/search?q=redux-thunk)
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## How To Install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Clone
+```
+git clone https://github.com/fwzfrds/arkasa-fe.git
+```
 
-### `npm test`
+- Install Module
+```
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Run Project
+```
+npm run start
+```
 
-### `npm run build`
+### Build Project
+```
+npm run build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Screenshots
+  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Backend
+* [`BACKEND ANKASA TICKETING`](https://github.com/muhislah/angkasa_backend)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Deploy
+* [`WEB ANKASA TICKETING`](https://ankasa.vercel.app/)
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Contributor
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<center>
+  <table>
+    <tr>
+      <th>Backend/PO</th>
+      <th>Backend</th>
+      <th>Backend</th>
+      <th>Frontend</th>
+      <th>Frontend</th>
+      <th>Frontend</th>
+    </tr>
+    <tr>
+      <td align="center">
+        <a href="https://github.com/muhislah">
+          <img width="150" style="background-size: contain;" src="https://avatars.githubusercontent.com/u/32208840?v=4"><br/>
+          <b>Muhamad Islahuddin</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/hasbialwikusmana">
+          <img width="150" src="https://avatars.githubusercontent.com/u/97004294?v=4" alt="Hasbi Alwi. K"><br/>
+          <b>Hasbi Alwi. K</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/sendialamsyah">
+          <img width="150" src="https://avatars.githubusercontent.com/u/103249655?v=4" alt="Sendi Alamsyah"><br/>
+          <b>Sendi Alamsyah</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/irfan43a">
+          <img width="150" src="	https://avatars.githubusercontent.com/u/98889949?v=4" alt="Irfan Abidin"><br/>
+          <b>Irfan Abidin</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/fwzfrds">
+          <img width="150" src="https://avatars.githubusercontent.com/u/85775604?v=4" alt="M. Fawwaz Firdaus"><br/>
+          <b>M. Fawwaz Firdaus</b>
+        </a>
+      </td>
+      <td align="center">
+        <a href="https://github.com/NisrinaNataraharja">
+          <img width="150" src="https://avatars.githubusercontent.com/u/98700935?v=4" alt="Nisrina Hasna. N"><br/>
+          <b>Nisrina Hasna. N</b>
+        </a>
+      </td>
+    </tr>
+  </table>
+</center>
