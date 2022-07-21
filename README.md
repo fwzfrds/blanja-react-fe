@@ -1,7 +1,7 @@
 <h1 align="center">Blanja</h1>
 
 <p align="center">
-  <img height="150" src="./assets/img/logo/blanja-logo.png" />
+  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658419835/blanja/logo/blanja-logo_igkoib.png" />
 </p>
 <p align="center">
   Built with React Js.
