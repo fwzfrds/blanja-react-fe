@@ -12,7 +12,7 @@ const EditProduct = (props) => {
     const navigate = useNavigate()
     const { id } = useParams()
     const dispatch = useDispatch()
-    const { isLoading, products } = useSelector((state) => state.products)
+    const { isLoading, admin } = useSelector((state) => state.admin)
     const [categories, setCategories] = useState('')
     const [localData, setLocalData] = useState([])
 
@@ -95,28 +95,28 @@ const EditProduct = (props) => {
                     formData.append(`photo`, images[image])
                 })
             } else {
-                if(saveImg) {
+                if (saveImg) {
                     formData.append('photo', saveImg)
                 }
             }
         }
 
-        if(updateData.name){
+        if (updateData.name) {
             formData.append('name', updateData.name)
         }
-        if(updateData.description) {
+        if (updateData.description) {
             formData.append('description', updateData.description)
         }
-        if(updateData.qty) {
+        if (updateData.qty) {
             formData.append('qty', updateData.qty)
         }
-        if(updateData.price) {
+        if (updateData.price) {
             formData.append('price', updateData.price)
         }
-        if(updateData.idCategory) {
+        if (updateData.idCategory) {
             formData.append('idCategory', updateData.idCategory)
         }
-        if(updateData.condition) {
+        if (updateData.condition) {
             formData.append('condition', updateData.condition)
         }
 
@@ -166,9 +166,11 @@ const EditProduct = (props) => {
             <div className={`${styles['profile-container']}`}>
                 <div className={`${styles['profile-nav']}`}>
                     <div className={`${styles.profile}`}>
-                        <img src="/assets/img/icon/user-account.png" alt="" className={`${styles['profile-img']}`} />
+                        <div className={`${styles.avatar}`}>
+                            <img src={admin.photo ? admin.photo : `/assets/img/photo.webp`} alt="" className={`${styles['profile-img']}`} />
+                        </div>
                         <div className={`${styles[`profile-text`]}`}>
-                            <h3 className="name">Johanes Mikael</h3>
+                            <h3 className="name">{admin.name ? admin.name : 'admin'}</h3>
                             <div className={`${styles['profile-action']}`}>
                                 <img src="/assets/img/icon/edit.png" alt="" className={`${styles['edit-icon']}`} />
                                 <p>Edit Profile</p>
@@ -281,9 +283,11 @@ const EditProduct = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <input type="file" multiple className='img_input' accept='image/*' onClick={delCurrentImage} onChange={handleUploadChange} />
+                            <input id='img-input' type="file" multiple className='img_input' accept='image/*' onClick={delCurrentImage} onChange={handleUploadChange} 
+                                style={{ display: 'none' }}
+                            />
                             <hr className={`${styles['hr-photo']}`} />
-                            <button className={`${styles['photo-btn']}`}>Upload foto</button>
+                            <label htmlFor='img-input' className={`${styles['photo-btn']}`}>Upload foto</label>
                         </div>
                     </div>
                     <div className={`${styles['product-desc']}`}>

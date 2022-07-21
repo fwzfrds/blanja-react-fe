@@ -27,9 +27,18 @@
     margin-left: 120px;
 }
 
-.profile-img {
+.avatar {
+    position: relative;
     width: 60px;
     height: 60px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .profile-text {
@@ -343,7 +352,7 @@
 .photo-container img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .photos-area {
@@ -385,7 +394,7 @@
 .photo img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .hr-photo {
@@ -405,6 +414,10 @@
     margin-top: 30px;
     cursor: pointer;
     transition: 0.125s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
 }
 
 .photo-btn:hover {

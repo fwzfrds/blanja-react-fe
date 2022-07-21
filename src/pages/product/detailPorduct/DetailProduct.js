@@ -1,28 +1,29 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 // import axios from 'axios';
 import { Link, useParams, useLocation } from 'react-router-dom'
-import styles from './detailProduct.module.css'
+import styles from './DetailProduct.module.css'
 import Navbar from '../../../components/module/navbar/Navbar';
 import Button from '../../../components/base/button/button';
 import Card from '../../../components/base/card/card';
 import { detailProduct } from '../../../config/redux/actions/productAction'
-import {  useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const DetailProduct = () => {
 
 
     const [productData, setProductData] = useState(null)
-    const location = useLocation();
+    const location = useLocation()
     const { id } = useParams()
+    const [prodImg, setProdImg] = useState('')
     // const { isLoading, products } = useSelector((state) => state.products)
-    const { isLoading, productDetail } = useSelector((state) => state.productDetail)
-
+    const { productDetail } = useSelector((state) => state.productDetail)
     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     console.log(`You changed the page to: ${location.pathname}`);
-    //     // getUser();
-    //   }, [location]);
+    useEffect(() => {
+        if(productDetail.image) {
+            setProdImg(productDetail.image)
+        }
+    }, [productDetail.image])
 
     useEffect(() => {
         console.log('dispatch run...')
@@ -41,6 +42,7 @@ const DetailProduct = () => {
 
     console.log(productDetail)
     console.log(productData)
+    console.log(prodImg)
 
     return (
         <div>
@@ -61,14 +63,21 @@ const DetailProduct = () => {
             <main className={`${styles['product-container']}`}>
                 <div className={`${styles['product-images']}`}>
                     <div className={`${styles['prod-img-container']}`}>
-                        <img src={productData !== null ? productData.image[0] : '...'} alt="" />
+                        <img src={prodImg ? prodImg[0] : 'https://fakeimg.pl/400x400/?text=product'} alt="" />
+                        {/* <img src={productData !== null ? productData.image[0] : '/assets/img/products/1.png'} alt="" /> */}
                     </div>
                     <div className={`${styles['img-thumbnail']}`}>
-                        <img src="/assets/img/products/1.png" alt="" />
-                        <img src="/assets/img/products/2.png" alt="" />
+                        {prodImg && prodImg.map((img, idx) => {
+                            return (
+                                <div key={idx} className={`${styles.img_thumb}`}>
+                                    <img src={img} alt="" />
+                                </div>
+                            )
+                        })}
+                        {/* <img src="/assets/img/products/2.png" alt="" />
                         <img src="/assets/img/products/3.png" alt="" />
                         <img src="/assets/img/products/4.png" alt="" />
-                        <img src="/assets/img/products/5.png" alt="" />
+                        <img src="/assets/img/products/5.png" alt="" /> */}
                     </div>
                 </div>
                 <div className={`${styles['product-details']}`}>
