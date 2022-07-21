@@ -111,7 +111,7 @@ const DetailProduct = () => {
                             <p>Size</p>
                             <div className={`${styles.sizes}`}>
                                 <span className={`${styles.decrease}`}>-</span>
-                                <span>28</span>
+                                <span>M</span>
                                 <span className={`${styles.increase}`}>+</span>
                             </div>
                         </div>
