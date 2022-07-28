@@ -252,6 +252,28 @@
     background-color: orange;
 }
 
+.modal_body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal_input {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal_input input {
+    height: 40px;
+    border-radius: 6px;
+    padding-left: 10px;
+}
+
+.modal_input textarea {
+    border-radius: 6px;
+    padding: 8px 10px;
+}
+
 @media only screen and (max-width: 600px) {
 
     .my-bag {

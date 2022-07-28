@@ -159,7 +159,7 @@ const Navbar = () => {
                   <ul className={`user-dropdown dropdown-menu ${styles['user-dropdown']} ${styles['dropdown-menu']} ${styles['show']}`} aria-labelledby="dropdownMenuLink">
                     <li><Link className={`${styles['dropdown-item']}`} to="/user-profile">My Account</Link></li>
                     <li><Link className={`${styles['dropdown-item']}`} to="#">Shopping Address</Link></li>
-                    <li><Link className={`${styles['dropdown-item']}`} to="/checkout">My Order</Link></li>
+                    <li><Link className={`${styles['dropdown-item']}`} to="/checkout">Checkout</Link></li>
                     <li>
                       <Link
                         to="#"

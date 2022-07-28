@@ -68,26 +68,30 @@ const DetailProduct = () => {
         try {
             if (userData && userData.token) {
                 const authToken = userData.token
-                const resp = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/cart`, addToCart, {
+                await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/cart`, addToCart, {
                     headers: {
                         Authorization: `Bearer ${authToken}`
                     }
                 })
 
-                console.log(resp.data.data)
                 swal({
                     title: 'Success',
-                    text: 'Add To Cart Success! ',
+                    text: 'Add To Cart Success!',
                     icon: 'success'
                 })
             }
         } catch (error) {
             console.log(error)
+            swal({
+                title: 'Error',
+                text: `${error.response.data.message}`,
+                icon: 'error'
+            })
         }
     }
 
     // console.log(productData)
-    console.log(addToCart)
+    // console.log(addToCart)
 
 
     return (

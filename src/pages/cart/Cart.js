@@ -3,12 +3,24 @@ import Navbar from '../../components/module/navbar/Navbar'
 import Button from '../../components/base/button/button';
 import styles from './Cart.module.css'
 import axios from 'axios';
+import Modal from 'react-bootstrap/Modal';
+import { useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
 
 const Cart = () => {
 
     const [cartData, setCartData] = useState('')
+    const [userData, setUserData] = useState('')
     const [authToken, setauthToken] = useState('')
     const [totalPrice, setTotalPrice] = useState(0)
+    const [checkout, setCheckout] = useState('')
+    const navigate = useNavigate()
+
+    // State Modal
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
+    // State Modal end
 
     useEffect(() => {
         let local
@@ -17,6 +29,7 @@ const Cart = () => {
             local = localStorage.getItem('BlanjaUser')
             localData = JSON.parse(local)
             setauthToken(localData.token)
+            setUserData(localData)
         }
     }, [])
 
@@ -38,7 +51,7 @@ const Cart = () => {
     }, [authToken])
 
     useEffect(() => {
-        if(cartData) {
+        if (cartData) {
             let total = 0
             cartData.forEach(item => {
                 total = total + item.price_product
@@ -47,8 +60,48 @@ const Cart = () => {
         }
     }, [cartData])
 
+    useEffect(() => {
+        if (totalPrice) {
+            setCheckout({ ...checkout, total: totalPrice, idCart: cartData[0].id_cart })
+        }
+    }, [totalPrice, cartData])
+
+    const handleInput = (e) => {
+        e.persist()
+
+        setCheckout({ ...checkout, [e.target.name]: e.target.value })
+    }
+
+    const handleCheckout = async (e) => {
+        e.preventDefault()
+
+        try {
+            await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/transactions`, checkout, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`
+                }
+            })
+
+            swal({
+                title: 'Checkout',
+                text: `Checout Success!`,
+                icon: 'success'
+            })
+
+            handleClose()
+        } catch (error) {
+            console.log(error)
+            return swal({
+                title: 'Checkout',
+                text: `${error.response.data.message}`,
+                icon: 'error'
+            })
+        }
+    }
+
     // console.log(totalPrice)
     console.log(cartData)
+    console.log(checkout)
 
     return (
         <div className={`${styles['cart-container']}`}>
@@ -153,9 +206,44 @@ const Cart = () => {
                     <Button
                         text='Buy'
                         className={`${styles['buy-button']}`}
+                        onClick={handleShow}
                     />
                 </div>
             </section>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Receiver Info</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className={`${styles.modal_body}`}>
+                    <div className={`${styles.modal_input}`}>
+                        <label htmlFor="name">Name</label>
+                        <input type="text" id='name' name='name' placeholder='receiver name' onChange={handleInput} />
+                    </div>
+                    <div className={`${styles.modal_input}`}>
+                        <label htmlFor="phone">Phone</label>
+                        <input type="text" id='phone' name='phone' placeholder='receiver phone number' onChange={handleInput} />
+                    </div>
+                    <div className={`${styles.modal_input}`}>
+                        <label htmlFor="address">Address</label>
+                        <textarea id='address' name='address' placeholder='receiver address' rows={5} onChange={handleInput} />
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary"
+                        text='Checkout'
+                        className={`${styles['buy-button']}`}
+                        onClick={handleCheckout}
+                        style={{
+                            width: 120
+                        }}
+                    >
+                        Close
+                    </Button>
+                    {/* <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                    </Button> */}
+                </Modal.Footer>
+            </Modal>
 
         </div>
     )
