@@ -88,8 +88,8 @@ const Navbar = () => {
     }
   }, [isLogout, navigate])
 
-  console.log(whoIsLogin)
-  console.log(photo)
+  // console.log(whoIsLogin)
+  // console.log(photo)
 
   return (
     <nav className={`navbar navbar-expand-lg shadow-sm ${styles.navbar}`}>
@@ -140,7 +140,7 @@ const Navbar = () => {
           {isLogin &&
             <ul className={`navbar-nav d-flex align-items-center gap-4 ${styles['navbar-nav']}`}>
               <li className="nav-item">
-                <Link className={`nav-link rounded ${styles['nav-link']}`} to="#"><img src="/assets/img/icon/cart.png" alt="" /></Link>
+                <Link className={`nav-link rounded ${styles['nav-link']}`} to="/cart"><img src="/assets/img/icon/cart.png" alt="" /></Link>
               </li>
               <li className="nav-item">
                 <Link className={`nav-link rounded ${styles['nav-link']}`} to="#"><img src="/assets/img/icon/bell.png" alt="" /></Link>
@@ -159,7 +159,7 @@ const Navbar = () => {
                   <ul className={`user-dropdown dropdown-menu ${styles['user-dropdown']} ${styles['dropdown-menu']} ${styles['show']}`} aria-labelledby="dropdownMenuLink">
                     <li><Link className={`${styles['dropdown-item']}`} to="/user-profile">My Account</Link></li>
                     <li><Link className={`${styles['dropdown-item']}`} to="#">Shopping Address</Link></li>
-                    <li><Link className={`${styles['dropdown-item']}`} to="#">My Order</Link></li>
+                    <li><Link className={`${styles['dropdown-item']}`} to="/checkout">My Order</Link></li>
                     <li>
                       <Link
                         to="#"

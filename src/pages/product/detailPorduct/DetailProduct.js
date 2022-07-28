@@ -7,42 +7,88 @@ import Button from '../../../components/base/button/button';
 import Card from '../../../components/base/card/card';
 import { detailProduct } from '../../../config/redux/actions/productAction'
 import { useDispatch, useSelector } from 'react-redux'
+import axios from 'axios';
+import swal from 'sweetalert';
 
 const DetailProduct = () => {
-
 
     const [productData, setProductData] = useState(null)
     const location = useLocation()
     const { id } = useParams()
     const [prodImg, setProdImg] = useState('')
-    // const { isLoading, products } = useSelector((state) => state.products)
     const { productDetail } = useSelector((state) => state.productDetail)
+    const [userData, setUserData] = useState('')
     const dispatch = useDispatch()
+    const [quantity, setQuantity] = useState(1)
+    const [addToCart, setAddToCart] = useState({
+        idProduct: productDetail.id,
+        qty: quantity
+    })
 
     useEffect(() => {
-        if(productDetail.image) {
+
+        if (localStorage.getItem('BlanjaUser')) {
+            const local = localStorage.getItem('BlanjaUser')
+            const localData = JSON.parse(local)
+            setUserData(localData)
+        }
+
+    }, [])
+
+    console.log(userData)
+
+    useEffect(() => {
+        if (productDetail.image) {
             setProdImg(productDetail.image)
         }
     }, [productDetail.image])
 
     useEffect(() => {
-        console.log('dispatch run...')
-        console.log(`You changed the page to: ${location.pathname}`)
         dispatch(detailProduct(id))
-        // console.log(products)
-        // setProductData(productDetail)
-    }, [location])
+    }, [location, dispatch, id])
 
     useLayoutEffect(() => {
-        console.log(productDetail)
         setProductData(productDetail)
     }, [productDetail])
 
-    // setProductData(products)
+    const handleIncrementQty = () => {
+        setQuantity(quantity + 1)
+        setAddToCart({ ...addToCart, qty: quantity + 1 })
+    }
 
-    console.log(productDetail)
-    console.log(productData)
-    console.log(prodImg)
+    const handleDecrementQty = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1)
+            setAddToCart({ ...addToCart, qty: quantity - 1 })
+        }
+    }
+
+    const handleAddToCart = async () => {
+
+        try {
+            if (userData && userData.token) {
+                const authToken = userData.token
+                const resp = await axios.post(`${process.env.REACT_APP_API_BACKEND}/v1/cart`, addToCart, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`
+                    }
+                })
+
+                console.log(resp.data.data)
+                swal({
+                    title: 'Success',
+                    text: 'Add To Cart Success! ',
+                    icon: 'success'
+                })
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    // console.log(productData)
+    console.log(addToCart)
+
 
     return (
         <div>
@@ -95,7 +141,7 @@ const DetailProduct = () => {
                     </div>
                     <div className={`${styles.price}`}>
                         <p>price</p>
-                        <h3>Rp. {productData !== null ? productData.price : 'Loading...'}</h3>
+                        <h3>Rp. {productData !== null ? (productData.price).toLocaleString() : 'Loading...'}</h3>
                     </div>
                     <div className={`${styles['product-color']}`}>
                         <p>color</p>
@@ -104,6 +150,7 @@ const DetailProduct = () => {
                             <div className={`${styles.color2}`}></div>
                             <div className={`${styles.color3}`}></div>
                             <div className={`${styles.color4}`}></div>
+                            <div className={`${styles.color5}`}></div>
                         </div>
                     </div>
                     <div className={`${styles['size-qty']}`}>
@@ -118,9 +165,9 @@ const DetailProduct = () => {
                         <div>
                             <p>Jumlah</p>
                             <div className={`${styles.quantity}`}>
-                                <span className={`${styles.decrease}`}>-</span>
-                                <span>1</span>
-                                <span className={`${styles.increase}`}>+</span>
+                                <span className={`${styles.decrease}`} onClick={handleDecrementQty}>-</span>
+                                <span>{quantity}</span>
+                                <span className={`${styles.increase}`} onClick={handleIncrementQty}>+</span>
                             </div>
                         </div>
                     </div>
@@ -131,8 +178,9 @@ const DetailProduct = () => {
                         >
                         </Button>
                         <Button
-                            text='Add to Bag'
+                            text='Add to Cart'
                             className={`${styles['add-btn']}`}
+                            onClick={handleAddToCart}
                         >
                         </Button>
                         <Button

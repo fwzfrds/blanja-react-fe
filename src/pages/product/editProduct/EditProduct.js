@@ -54,7 +54,9 @@ const EditProduct = (props) => {
                 const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/products/detail/${product_id}`)
                 const data = result.data.data
                 setData(data)
-                setImage(data.image)
+                if(data.image) {
+                    setImage(data.image)
+                }
             } catch (error) {
                 console.log(error)
             }
@@ -153,9 +155,10 @@ const EditProduct = (props) => {
         setImage([])
     }
 
-    // console.log(data)
+    console.log(data)
     console.log(updateData)
     console.log(saveImg)
+    console.log(image)
     // console.log(products)
 
     // Edit Berhasil Lanjut Delete

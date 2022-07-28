@@ -168,25 +168,29 @@
 .color-items div {
     height: 36px;
     width: 36px;
-    background: black;
+    background: white;
     border-radius: 50%;
 }
 
 .color-items div.selected {
-    border: 2px solid red;
+    border: 2px solid black;
     /* padding: 5px; */
 }
 
 .color-items div.color2 {
-    background: rgba(216, 66, 66, 1);
+    background: green;
 }
 
 .color-items div.color3 {
-    background: rgba(66, 144, 216, 1);
+    background: black;
 }
 
 .color-items div.color4 {
-    background: rgba(66, 216, 108, 1);
+    background: navy;
+}
+
+.color-items div.color5 {
+    background: maroon;
 }
 
 .size-qty {
