@@ -84,7 +84,7 @@ Contributions are what make the open source community such an amazing place to b
 ## Screenshot
 | Add Recipe Page | Detail Page |
 | ------------- | ------------- |
-| ![Login](./assets/img/screenshot/login.png?raw=true "Login Page") | ![Register](./assets/img/screenshot/register.png?raw=true "Register Page")|
+| ![Login](/public/assets/img/screenshot/login.png?raw=true "Login Page") | ![Register](/public/assets/img/screenshot/register.png?raw=true "Register Page")|
 
 | Register Page  | Login Page |
 | ------------- | ------------- |
