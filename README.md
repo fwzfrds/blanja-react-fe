@@ -82,35 +82,35 @@ Contributions are what make the open source community such an amazing place to b
 
 <!-- SCREENSHOT -->
 ## Screenshot
-| Add Recipe Page | Detail Page |
+| Login Page | Register Page |
 | ------------- | ------------- |
 | ![Login](/public/assets/img/screenshot/login.png?raw=true "Login Page") | ![Register](/public/assets/img/screenshot/register.png?raw=true "Register Page")|
 
-| Register Page  | Login Page |
+| Landing Page  | Product Detail Page |
 | ------------- | ------------- |
-| ![landing](/images/register.png?raw=true "Landing Page") | ![login](/images/login.png?raw=true "Login Page") |
+| ![Landing](/public/assets/img/home.png?raw=true "Landing Page") | ![Product Detail](/public/assets/img/product-detail.png?raw=true "Product Detail Page") |
 
-| Profile Page | All Recipe Page |
+| Profile Page | Add Product Page |
 | ------------- | ------------- |
-| ![profile](/images/profile.png?raw=true "Profile Page") | ![allrecipe](/images/recipe.png?raw=true "Recipe Page") |
+| ![Profile](/public/assets/img/my-profile.png?raw=true "Profile Page") | ![Add Product](/public/assets/img/add-product.png?raw=true "Add Product Page") |
 
-| Landing Page | Video Detail |
+| Cart Page | Checkout Page |
 | ------------- | ------------- |
-| ![landing](/images/landing.png?raw=true "Landing Page") | ![login](/images/video.png?raw=true "Login Page") |
+| ![Cart](/public/assets/img/cart.png?raw=true "Cart Page") | ![Checkout](/public/assets/img/checkout.png?raw=true "Checkout Page") |
 
 
 <!-- RELATED PROJECT -->
 ## Related Project
-* [`Mama Recipe Demo`](https://foodrecipefe.vercel.app/)
-* [`Mama Recipe Rest API`](https://food-recipe-be.herokuapp.com)
-* [`Mama Recipe Rest API Repository`](https://github.com/muhislah/food_recipe_be.git)
+* [`Blanja Web Demo`](https://blanja-app-fwzfrds.vercel.app/)
+* [`Blanja Rest API URL`](https://blanja-web-api.herokuapp.com)
+* [`Blanja Rest API Repository`](https://github.com/fwzfrds/blanja)
 
 ## Developer
 
 <center>
   <table>
     <tr>
-      <th>Owner</th>
+      <th>Owner | Developer</th>
     </tr>
     <tr>
       <td align="center">
