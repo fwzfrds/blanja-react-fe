@@ -88,15 +88,15 @@ Contributions are what make the open source community such an amazing place to b
 
 | Landing Page  | Product Detail Page |
 | ------------- | ------------- |
-| ![Landing](/public/assets/img/home.png?raw=true "Landing Page") | ![Product Detail](/public/assets/img/product-detail.png?raw=true "Product Detail Page") |
+| ![Landing](/public/assets/img/screenshot/home.png?raw=true "Landing Page") | ![Product Detail](/public/assets/img/screenshot/product-detail.png?raw=true "Product Detail Page") |
 
 | Profile Page | Add Product Page |
 | ------------- | ------------- |
-| ![Profile](/public/assets/img/my-profile.png?raw=true "Profile Page") | ![Add Product](/public/assets/img/add-product.png?raw=true "Add Product Page") |
+| ![Profile](/public/assets/img/screenshot/my-profile.png?raw=true "Profile Page") | ![Add Product](/public/assets/img/screenshot/add-product.png?raw=true "Add Product Page") |
 
 | Cart Page | Checkout Page |
 | ------------- | ------------- |
-| ![Cart](/public/assets/img/cart.png?raw=true "Cart Page") | ![Checkout](/public/assets/img/checkout.png?raw=true "Checkout Page") |
+| ![Cart](/public/assets/img/screenshot/cart.png?raw=true "Cart Page") | ![Checkout](/public/assets/img/screenshot/checkout.png?raw=true "Checkout Page") |
 
 
 <!-- RELATED PROJECT -->
