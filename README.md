@@ -65,7 +65,7 @@ npm install
 ```
 3. Add .env file at root folder project, and add following
 ```sh
-NEXT_PUBLIC_BACKEND_API = https://food-recipe-be.herokuapp.com // or use your own
+REACT_APP_API_BACKEND = https://https://blanja-web-api.herokuapp.com // or use your own
 
 ```
 
@@ -84,7 +84,7 @@ Contributions are what make the open source community such an amazing place to b
 ## Screenshot
 | Add Recipe Page | Detail Page |
 | ------------- | ------------- |
-| ![add recipe](/images/add.png?raw=true "Add Recipe Page") | ![detail recipe](/images/detail.png?raw=true "Detail Recipe Page")|
+| ![Login](./assets/img/screenshot/login.png?raw=true "Login Page") | ![Register](./assets/img/screenshot/register.png?raw=true "Register Page")|
 
 | Register Page  | Login Page |
 | ------------- | ------------- |
