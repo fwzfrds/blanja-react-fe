@@ -22,6 +22,7 @@
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
+  * [Packages / Dependencies](#dependencies)
 * [Getting Started](#getting-started)
   * [Prerequisites](#prerequisites)
   * [Installation](#installation)
@@ -34,15 +35,26 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Blanja is an e-commerce web base application used that provides various items. This application built with Node JS, Next JS as frontend framework.
+Blanja is an e-commerce web base application used that provides various items. This application built with Node JS, React JS, Nodemailer as as module for sending email, and Cloudinary as cloud services for uploading images.
 This Application use Rest API server from [blanja-api](https://blanja-web-api.herokuapp.com)
 
 ### Built With
 
 * [Node JS](https://nodejs.org/en/docs/)
-* [Next JS](https://nextjs.org/)
+* [React Js](https://reactjs.org)
+* [Nodemailer](https://nodemailer.com/about/)
+* [Cloudinary](https://cloudinary.com/)
 
-
+### Dependencies
+- [React Js](https://reactjs.org)
+- [Axios](https://www.npmjs.com/package/axios)
+- [Bootstrap](https://www.npmjs.com/package/bootstrap)
+- [Sweetalert](https://www.npmjs.com/package/sweetalert)
+- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
+- [Redux](https://www.npmjs.com/package/redux)
+- [React-redux](https://www.npmjs.com/package/react-redux)
+- [Redux-logger](https://www.npmjs.com/package/redux-logger)
+- [Redux-thunk](https://www.npmjs.com/search?q=redux-thunk)
 
 <!-- GETTING STARTED -->
 ## Getting Started
