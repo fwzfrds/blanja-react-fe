@@ -115,7 +115,7 @@ export const deleteProduct = (authToken, id) => async (dispatch) => {
     try {
         dispatch({ type: 'DELETE_PRODUCT_PENDING' })
 
-        await axios.delete(`http://localhost:5000/v1/products/${id}`, {
+        await axios.delete(`${process.env.REACT_APP_API_BACKEND}/v1/products/${id}`, {
             headers: { Authorization: `Bearer ${authToken}` }
         })
         swal({

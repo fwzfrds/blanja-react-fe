@@ -1,67 +1,109 @@
-<h1 align="center">Blanja</h1>
-
+<br />
 <p align="center">
-  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658419835/blanja/logo/blanja-logo_igkoib.png" />
+
+  <h3 align="center">Blanja | E-commerce</h3>
+  <p align="center">
+    <image align="center" width="100" src='https://res.cloudinary.com/wazcomp/image/upload/v1658419835/blanja/logo/blanja-logo_igkoib.png' />
+  </p>
+
+  <p align="center">
+    <br />
+    <a href="https://github.com/fwzfrds/blanja-react-fe"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://blanja-app-fwzfrds.vercel.app/">View Demo</a>
+  </p>
 </p>
-<p align="center">
-  Built with React Js.
-</p>
-
-## About
-Blanja is an e-commerce website that provides various item for you. Developed by the Muhammad Fawwaz Firdaus. Built with React JS, Express JS, and Postgree SQL.
-
-## Dependencies
-- [React Js](https://(https://reactjs.org)/)
-- [Axios](https://www.npmjs.com/package/axios)
-- [Bootstrap](https://www.npmjs.com/package/bootstrap)
-- [Sweetalert](https://www.npmjs.com/package/sweetalert)
-- [react-router-dom](https://www.npmjs.com/package/react-router-dom)
-- [Redux](https://www.npmjs.com/package/redux)
-- [React-redux](https://www.npmjs.com/package/react-redux)
-- [Redux-logger](https://www.npmjs.com/package/redux-logger)
-- [Redux-thunk](https://www.npmjs.com/search?q=redux-thunk)
 
 
-## How To Install
 
-- Clone
-```
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Related Project](#related-project)
+* [Screenshot](#screenshot)
+* [Contact](#contact)
+
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+Blanja is an e-commerce web base application used that provides various items. This application built with Node JS, Next JS as frontend framework.
+This Application use Rest API server from [blanja-api](https://blanja-web-api.herokuapp.com)
+
+### Built With
+
+* [Node JS](https://nodejs.org/en/docs/)
+* [Next JS](https://nextjs.org/)
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+
+* [nodejs](https://nodejs.org/en/download/)
+
+### Installation
+
+1. Clone the repo
+```sh
 git clone https://github.com/fwzfrds/blanja-react-fe.git
 ```
-
-- Install Module
-```
+2. Install NPM packages
+```sh
 npm install
 ```
+3. Add .env file at root folder project, and add following
+```sh
+NEXT_PUBLIC_BACKEND_API = https://food-recipe-be.herokuapp.com // or use your own
 
-- Run Project
-```
-npm run start
-```
-
-### Build Project
-```
-npm run build
 ```
 
-## Screenshots
-  
-<p align="center">
-  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658419961/blanja/screenshot/home-2_cimhr9.jpg" />
-  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658419961/blanja/screenshot/my-profile-2_wwclit.png" />
-</p>
+<!-- CONTRIBUTING -->
+## Contributing
 
-<p align="center">
-  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658419961/blanja/screenshot/product-detail_gumfeh.png" />
-  <img height="150" src="https://res.cloudinary.com/wazcomp/image/upload/v1658419961/blanja/screenshot/add-product_uppnu6.png" />
-</p>
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Backend
-* [`BACKEND REPO`](https://github.com/fwzfrds/blanja)
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b your/branch`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/yourbranch`)
+5. Open a Pull Request
 
-## Demo
-* [`Blanja`](https://blanja-app-fwzfrds.vercel.app/)
+<!-- SCREENSHOT -->
+## Screenshot
+| Add Recipe Page | Detail Page |
+| ------------- | ------------- |
+| ![add recipe](/images/add.png?raw=true "Add Recipe Page") | ![detail recipe](/images/detail.png?raw=true "Detail Recipe Page")|
 
+| Register Page  | Login Page |
+| ------------- | ------------- |
+| ![landing](/images/register.png?raw=true "Landing Page") | ![login](/images/login.png?raw=true "Login Page") |
+
+| Profile Page | All Recipe Page |
+| ------------- | ------------- |
+| ![profile](/images/profile.png?raw=true "Profile Page") | ![allrecipe](/images/recipe.png?raw=true "Recipe Page") |
+
+| Landing Page | Video Detail |
+| ------------- | ------------- |
+| ![landing](/images/landing.png?raw=true "Landing Page") | ![login](/images/video.png?raw=true "Login Page") |
+
+
+<!-- RELATED PROJECT -->
+## Related Project
+* [`Mama Recipe Demo`](https://foodrecipefe.vercel.app/)
+* [`Mama Recipe Rest API`](https://food-recipe-be.herokuapp.com)
+* [`Mama Recipe Rest API Repository`](https://github.com/muhislah/food_recipe_be.git)
 
 ## Developer
 

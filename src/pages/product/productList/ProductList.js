@@ -6,8 +6,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import swal from 'sweetalert';
 import Button from '../../../components/base/button/button';
 import LinkButton from '../../../components/base/linkButton/LinkButton';
-import {useDispatch, useSelector} from 'react-redux'
-import {deleteProduct} from '../../../config/redux/actions/productAction'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteProduct } from '../../../config/redux/actions/productAction'
 
 const ProductList = () => {
 
@@ -24,7 +24,7 @@ const ProductList = () => {
 
     const fethData = async () => {
         try {
-            const result = await axios.get('http://localhost:5000/v1/products/')
+            const result = await axios.get(`${process.env.REACT_APP_API_BACKEND}/v1/products/`)
             console.log(result.data);
             setData(result.data.data)
             setLoading(false);
@@ -46,7 +46,7 @@ const ProductList = () => {
         thisClicked.innerText = "Deleting...";
 
         try {
-            dispatch(deleteProduct(authToken,id))
+            dispatch(deleteProduct(authToken, id))
             thisClicked.closest("tr").remove();
         } catch (error) {
             console.log(error.response.data.message);
@@ -101,12 +101,12 @@ const ProductList = () => {
     return (
         <div className='container mt-5'>
             <h3>Product List</h3>
-            <LinkButton 
-                text='Add Product' 
+            <LinkButton
+                text='Add Product'
                 style={
                     {
-                        width: 'max-content', 
-                        height: 40, 
+                        width: 'max-content',
+                        height: 40,
                         background: 'red',
                         borderRadius: 8,
                         border: 'none',
@@ -119,16 +119,16 @@ const ProductList = () => {
                 navigateTo={'/add-product'}
             />
             <Button
-                text='+ Product' 
+                text='+ Product'
                 style={
                     {
                         width: '100px', height: 40, background: 'red',
                         borderRadius: 8,
                         border: 'none',
-                        color: 'white' 
+                        color: 'white'
                     }
-                } 
-                onClick={clickButton} 
+                }
+                onClick={clickButton}
             />
             <table className="table">
                 <thead>
