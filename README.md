@@ -35,7 +35,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Blanja is an e-commerce web base application used that provides various items. This application built with Node JS, React JS, Nodemailer as as module for sending email, and Cloudinary as cloud services for uploading images.
+Blanja is an e-commerce web base application used that provides various items. This application built with Node JS, React JS, Nodemailer as module for sending email, and Cloudinary as cloud services for uploading images.
 This Application use Rest API server from [blanja-api](https://blanja-web-api.herokuapp.com)
 
 ### Built With
